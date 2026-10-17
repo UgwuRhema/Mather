@@ -7,21 +7,38 @@
 
 %%
 
+"start:" {
+	return START_TOK;
+}
+
+"print->" {
+	return PRINT_TOK;
+}
+
 [0-9]+ {
-	printf("Number\n");
+	return NUM_TOK;
 }
 
 "\\".* {
 	/* skip my comments */
 }
 
-[a-zA-Z_][a-zA-Z0-9_]* {
-	printf("Identifier\n");
+[ \t\r\n]+ {
+	/* skip whitespace */
 }
 
-. {
-	fprintf(stderr, "Unknow character '%s'\n", yytext);
+[a-zA-Z_][a-zA-Z0-9_]* {
+	return IDENT_TOK;
 }
+
+"=" { return ASSIGN_TOK; }
+"+" { return ADD_TOK; }
+"-" { return MINUS_TOK; }
+"/" { return DIV_TOK; }
+"*" { return MUL_TOK; }
+";" { return SEMICOLON_TOK; }
+"(" { return LEFTPAREN_TOK; }
+")" { return RIGHTPAREN_TOK; }
 
 %%
 

@@ -6,7 +6,8 @@ B := /usr/bin/bison
 BFLAGS := -d
 
 # source files
-# PAR := ./src/parser.y
+PAR := ./src/parser.y
+PAR_OUT := ./src/parser.c
 LEX := ./src/lexer.l
 LEX_OUT := ./src/lexer.c
 INT := ./src/interpreter.c
@@ -17,8 +18,9 @@ all: $(INT)
 
 lex:
 	$(F) -o $(LEX_OUT) $(LEX)
-	#the line below is temporary!
-	$(CC) $(CFLAGS) -o $(INT_OUT) $(LEX_OUT) -lfl
+
+parse:
+	$(B) $(BFLAGS) -o $(PAR_OUT) $(PAR)
 
 clean:
 	rm -rf *.o $(INT_OUT)

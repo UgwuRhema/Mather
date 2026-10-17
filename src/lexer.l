@@ -8,7 +8,7 @@
 
 %%
 
-"start:" {
+"start" {
 	return START_TOK;
 }
 
@@ -17,6 +17,7 @@
 }
 
 [0-9]+ {
+	yylval.num = atoi(yytext);
 	return NUM_TOK;
 }
 
@@ -29,6 +30,7 @@
 }
 
 [a-zA-Z_][a-zA-Z0-9_]* {
+	yylval.str = strdup(yytext);
 	return IDENT_TOK;
 }
 
@@ -38,13 +40,10 @@
 "/" { return DIV_TOK; }
 "*" { return MUL_TOK; }
 ";" { return SEMICOLON_TOK; }
+":" { return COLON_TOK; }
 "(" { return LEFTPAREN_TOK; }
 ")" { return RIGHTPAREN_TOK; }
 
-%%
+. { fprintf(stderr, "Mather: Error, Unknown character '%s'\n", yytext); }
 
-int main(int argc, char *argv[])
-{
-	yylex();
-	return 0;
-}
+%%

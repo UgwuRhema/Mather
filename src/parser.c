@@ -1582,7 +1582,7 @@ extern FILE *yyin;
 int
 main(int argc, char *argv[])
 {
-	if (ac > 1)
+	if (argc > 1)
 	{
 		FILE *file = fopen(argv[1], "r");
 		if (!file)
@@ -1594,4 +1594,10 @@ main(int argc, char *argv[])
 	}
 
 	return yyparse();
+}
+
+void 
+yyerror(const char *s)
+{
+	fprintf(stderr, "Mather: line %d: %s near '%s'\n", yylineno, s, yytext);
 }

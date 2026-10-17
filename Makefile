@@ -22,6 +22,9 @@ lex:
 parse:
 	$(B) $(BFLAGS) -o $(PAR_OUT) $(PAR)
 
+lp:
+	$(CC) $(CFLAGS) -o $(INT_OUT) $(LEX_OUT) $(PAR_OUT) -lfl 
+
 clean:
 	rm -rf *.o $(INT_OUT)
 

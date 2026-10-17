@@ -37,6 +37,7 @@ main(int argc, char *argv[])
 	if (w < 0)
 		return -1;
 	fclose(fd);
+	free((void *)contents);
 	return 0;
 }
 

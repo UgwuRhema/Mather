@@ -14,7 +14,7 @@ INT := ./src/interpreter.c
 INT_OUT := ./mather
 
 all: $(INT)
-	$(CC) $(CFLAGS) -o $(INT_OUT) $(INT)
+	$(CC) $(CFLAGS) -o $(INT_OUT) $(INT) $(PAR_OUT) $(LEX_OUT) -lfl
 
 lex:
 	$(F) -o $(LEX_OUT) $(LEX)

@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include "parser.h"
+#include <string.h>
+#include <stdlib.h>
 
 extern FILE *yyin;
 
@@ -13,7 +15,13 @@ main(int argc, char *argv[])
 		return 1;
 	}
 
-	FILE *fd = fopen(argv[1], "r");	
+	const char *filename = strdup(argv[1]);
+	FILE *fd = fopen(filename, "r");	
+	if (!fd)
+	{
+		fprintf(stderr, "Mather: Error, failed to open %s\n", filename);
+		return 1;
+	}
 	yyin = fd;
 
 	return yyparse();

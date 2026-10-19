@@ -1,4 +1,4 @@
 start:
-	print->Hello World;
+	print->HelloWorld;
 	x = 5;
 	y = x;

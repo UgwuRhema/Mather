@@ -830,11 +830,12 @@ YY_RULE_SETUP
 #line 28 "./src/lexer.l"
 {
 	/* skip whitespace */
+	/* it definitely does! */
 }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 32 "./src/lexer.l"
+#line 33 "./src/lexer.l"
 {
 	yylval.str = strdup(yytext);
 	return IDENT_TOK;
@@ -842,60 +843,60 @@ YY_RULE_SETUP
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 37 "./src/lexer.l"
+#line 38 "./src/lexer.l"
 { return ASSIGN_TOK; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 38 "./src/lexer.l"
+#line 39 "./src/lexer.l"
 { return ADD_TOK; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 39 "./src/lexer.l"
+#line 40 "./src/lexer.l"
 { return MINUS_TOK; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 40 "./src/lexer.l"
+#line 41 "./src/lexer.l"
 { return DIV_TOK; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 41 "./src/lexer.l"
+#line 42 "./src/lexer.l"
 { return MUL_TOK; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 42 "./src/lexer.l"
+#line 43 "./src/lexer.l"
 { return SEMICOLON_TOK; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 43 "./src/lexer.l"
+#line 44 "./src/lexer.l"
 { return COLON_TOK; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 44 "./src/lexer.l"
+#line 45 "./src/lexer.l"
 { return LEFTPAREN_TOK; }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 45 "./src/lexer.l"
+#line 46 "./src/lexer.l"
 { return RIGHTPAREN_TOK; }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 47 "./src/lexer.l"
+#line 48 "./src/lexer.l"
 { fprintf(stderr, "Mather: Error, Unknown character '%s'\n", yytext); }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 49 "./src/lexer.l"
+#line 50 "./src/lexer.l"
 ECHO;
 	YY_BREAK
-#line 898 "./src/lexer.c"
+#line 899 "./src/lexer.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1912,6 +1913,6 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 49 "./src/lexer.l"
+#line 50 "./src/lexer.l"
 
 

@@ -122,8 +122,9 @@ enum yysymbol_kind_t
   YYSYMBOL_RIGHTPAREN_TOK = 15,            /* "')'"  */
   YYSYMBOL_YYACCEPT = 16,                  /* $accept  */
   YYSYMBOL_program = 17,                   /* program  */
-  YYSYMBOL_start = 18,                     /* start  */
-  YYSYMBOL_start_label = 19                /* start_label  */
+  YYSYMBOL_statements = 18,                /* statements  */
+  YYSYMBOL_statement = 19,                 /* statement  */
+  YYSYMBOL_print_stmt = 20                 /* print_stmt  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -449,18 +450,18 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  6
+#define YYFINAL  4
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   2
+#define YYLAST   5
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  16
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  4
+#define YYNNTS  5
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  4
+#define YYNRULES  6
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  7
+#define YYNSTATES  11
 
 /* YYMAXUTOK -- Last valid token kind.  */
 #define YYMAXUTOK   270
@@ -511,7 +512,7 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    33,    33,    36,    39
+       0,    33,    33,    36,    37,    40,    43
 };
 #endif
 
@@ -532,7 +533,7 @@ static const char *const yytname[] =
   "\"'Equals operator'\"", "\"'Addition operator'\"",
   "\"'Minus operator'\"", "\"'Division operator'\"",
   "\"'Multiplication operator'\"", "\"';'\"", "\"':'\"", "\"'('\"",
-  "\"')'\"", "$accept", "program", "start", "start_label", YY_NULLPTR
+  "\"')'\"", "$accept", "program", "statements", "statement", "print_stmt", YY_NULLPTR
 };
 
 static const char *
@@ -556,7 +557,8 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-      -3,   -12,     2,   -13,   -13,   -13,   -13
+      -3,   -12,     2,   -13,   -13,    -1,    -2,   -13,   -13,    -7,
+     -13
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -564,19 +566,20 @@ static const yytype_int8 yypact[] =
    means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       0,     0,     0,     2,     3,     4,     1
+       0,     0,     0,     3,     1,     2,     0,     4,     5,     0,
+       6
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -13,   -13,   -13,   -13
+     -13,   -13,   -13,   -13,   -13
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-       0,     2,     3,     4
+       0,     2,     5,     7,     8
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -584,31 +587,32 @@ static const yytype_int8 yydefgoto[] =
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-       1,     5,     6
+       1,     3,     4,     6,     9,    10
 };
 
 static const yytype_int8 yycheck[] =
 {
-       3,    13,     0
+       3,    13,     0,     4,     6,    12
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
    state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,     3,    17,    18,    19,    13,     0
+       0,     3,    17,    13,     0,    18,     4,    19,    20,     6,
+      12
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    16,    17,    18,    19
+       0,    16,    17,    18,    18,    19,    20
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr2[] =
 {
-       0,     2,     1,     1,     2
+       0,     2,     3,     0,     2,     1,     3
 };
 
 
@@ -1341,16 +1345,16 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-  case 4: /* start_label: "'Start label'" "':'"  */
-#line 39 "./src/parser.y"
-                                 {
-				printf("A Start label\n");
+  case 6: /* print_stmt: "'Print'" "'Identifier'" "';'"  */
+#line 43 "./src/parser.y"
+                                              {
+				printf("%s\n", (yyvsp[-1].str));
 			}
-#line 1350 "./src/parser.c"
+#line 1354 "./src/parser.c"
     break;
 
 
-#line 1354 "./src/parser.c"
+#line 1358 "./src/parser.c"
 
       default: break;
     }
@@ -1574,7 +1578,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 44 "./src/parser.y"
+#line 48 "./src/parser.y"
 
 
 extern FILE *yyin;

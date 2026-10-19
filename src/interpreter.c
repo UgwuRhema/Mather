@@ -1,4 +1,7 @@
 #include <stdio.h>
+#include "parser.h"
+
+extern FILE *yyin;
 
 int
 main(int argc, char *argv[])
@@ -10,5 +13,8 @@ main(int argc, char *argv[])
 		return 1;
 	}
 
-	return 0;
+	FILE *fd = fopen(argv[1], "r");	
+	yyin = fd;
+
+	return yyparse();
 }

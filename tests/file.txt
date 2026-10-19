@@ -1,3 +1,4 @@
 start:
-
-	print->Nigger;
+	print->Hello World;
+	x = 5;
+	y = x;

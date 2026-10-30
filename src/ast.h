@@ -60,19 +60,19 @@ struct tree
 	struct stmt *statements;
 };
 
-struct expr *expr_num(int value);
-struct expr *expr_ident(char *name);
-struct expr *expr_binary(enum OP_TYPE op, struct expr *left, struct expr *right);
+struct expr *expr_num(int);
+struct expr *expr_ident(char *);
+struct expr *expr_binary(enum OP_TYPE, struct expr *, struct expr *);
 
-struct stmt *stmt_print(struct expr *value);
-struct stmt *stmt_assign(char *name, struct expr *value);
-struct stmt *stmt_expr(struct expr *value);
+struct stmt *stmt_print(struct expr *);
+struct stmt *stmt_assign(char *, struct expr *);
+struct stmt *stmt_expr(struct expr *);
 
 struct tree *tree_new(void);
-void tree_add_stmt(struct tree *tree, struct stmt *stmt);
+void tree_add_stmt(struct tree *, struct stmt *);
 
-void expr_free(struct expr *expr);
-void stmt_free(struct stmt *stmt);
-void tree_free(struct tree *tree);
+void expr_free(struct expr *);
+void stmt_free(struct stmt *);
+void tree_free(struct tree *);
 
 #endif

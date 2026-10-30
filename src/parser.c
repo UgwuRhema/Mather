@@ -70,13 +70,14 @@
 #line 1 "./src/parser.y"
 
 #include <stdio.h>
+#include "ast.h"
 /* declarations */
 int yylex(void);
 void yyerror(const char *s);
 extern char *yytext;
 extern int yylineno;
 
-#line 80 "./src/parser.c"
+#line 81 "./src/parser.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -516,9 +517,9 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    33,    33,    36,    37,    40,    41,    42,    46,    49,
-      55,    58,    62,    63,    64,    67,    68,    69,    72,    73,
-      74
+       0,    34,    34,    37,    38,    41,    42,    43,    47,    50,
+      56,    59,    63,    64,    65,    68,    69,    70,    73,    74,
+      75
 };
 #endif
 
@@ -1367,63 +1368,63 @@ yyreduce:
   switch (yyn)
     {
   case 8: /* print_stmt: "'Print'" "'Identifier'" "';'"  */
-#line 46 "./src/parser.y"
+#line 47 "./src/parser.y"
                                               {
 				printf("%s\n", (yyvsp[-1].str));
 			}
-#line 1375 "./src/parser.c"
+#line 1376 "./src/parser.c"
     break;
 
   case 9: /* print_stmt: "'Print'" "'Number'" "';'"  */
-#line 49 "./src/parser.y"
+#line 50 "./src/parser.y"
                                                           {
 				printf("%d\n", (yyvsp[-1].num));
 			}
-#line 1383 "./src/parser.c"
+#line 1384 "./src/parser.c"
     break;
 
   case 10: /* assign_stmt: "'Identifier'" "'='" "'Identifier'" "';'"  */
-#line 55 "./src/parser.y"
+#line 56 "./src/parser.y"
                                                           {
 				printf("%s had been assigned to %s\n", (yyvsp[-1].str), (yyvsp[-3].str));
 			}
-#line 1391 "./src/parser.c"
+#line 1392 "./src/parser.c"
     break;
 
   case 11: /* assign_stmt: "'Identifier'" "'='" "'Number'" "';'"  */
-#line 58 "./src/parser.y"
+#line 59 "./src/parser.y"
                                                                      {
 				printf("%d has been assigned to %s\n", (yyvsp[-1].num), (yyvsp[-3].str));	
 			}
-#line 1399 "./src/parser.c"
+#line 1400 "./src/parser.c"
     break;
 
   case 13: /* expr: expr "'+'" term  */
-#line 63 "./src/parser.y"
+#line 64 "./src/parser.y"
                             { printf("Addition\n"); }
-#line 1405 "./src/parser.c"
+#line 1406 "./src/parser.c"
     break;
 
   case 14: /* expr: expr "'-'" term  */
-#line 64 "./src/parser.y"
+#line 65 "./src/parser.y"
                               { printf("Subtraction\n"); }
-#line 1411 "./src/parser.c"
+#line 1412 "./src/parser.c"
     break;
 
   case 16: /* term: term "'*'" factor  */
-#line 68 "./src/parser.y"
+#line 69 "./src/parser.y"
                               { printf("Multiplication\n"); }
-#line 1417 "./src/parser.c"
+#line 1418 "./src/parser.c"
     break;
 
   case 17: /* term: term "'/'" factor  */
-#line 69 "./src/parser.y"
+#line 70 "./src/parser.y"
                               { printf("Division\n"); }
-#line 1423 "./src/parser.c"
+#line 1424 "./src/parser.c"
     break;
 
 
-#line 1427 "./src/parser.c"
+#line 1428 "./src/parser.c"
 
       default: break;
     }
@@ -1647,7 +1648,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 77 "./src/parser.y"
+#line 78 "./src/parser.y"
 
 
 void 

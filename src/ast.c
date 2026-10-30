@@ -34,3 +34,30 @@ expr_binary(enum OP_TYPE t, struct expr *left, struct expr *right)
 	ne->as.binary.right = right;
 	return ne;
 }
+
+void
+expr_free(struct expr *e)
+{
+	if (!e) return;
+	switch(e->type)
+	{
+		case EXPR_NUM:
+			/*just free the main expr node*/
+			free((void *)e);
+			break;
+		case EXPR_IDENT:
+			free((void *)e->as.ident);
+			free((void *)e);
+			break;
+		case EXPR_BINARY:
+			expr_free(e->as.binary.left);
+			expr_free(e->as.binary.right);
+			free((void *)e);
+			break;
+		default:
+			fprintf(stderr, "Invalid option while freeing expression node\n");
+			free((void *)e);
+			break;
+	}
+	return;
+}

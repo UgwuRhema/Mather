@@ -111,11 +111,11 @@ enum yysymbol_kind_t
   YYSYMBOL_PRINT_TOK = 4,                  /* "'Print'"  */
   YYSYMBOL_NUM_TOK = 5,                    /* "'Number'"  */
   YYSYMBOL_IDENT_TOK = 6,                  /* "'Identifier'"  */
-  YYSYMBOL_ASSIGN_TOK = 7,                 /* "'Equals operator'"  */
-  YYSYMBOL_ADD_TOK = 8,                    /* "'Addition operator'"  */
-  YYSYMBOL_MINUS_TOK = 9,                  /* "'Minus operator'"  */
-  YYSYMBOL_DIV_TOK = 10,                   /* "'Division operator'"  */
-  YYSYMBOL_MUL_TOK = 11,                   /* "'Multiplication operator'"  */
+  YYSYMBOL_ASSIGN_TOK = 7,                 /* "'='"  */
+  YYSYMBOL_ADD_TOK = 8,                    /* "'+'"  */
+  YYSYMBOL_MINUS_TOK = 9,                  /* "'-'"  */
+  YYSYMBOL_DIV_TOK = 10,                   /* "'/'"  */
+  YYSYMBOL_MUL_TOK = 11,                   /* "'*'"  */
   YYSYMBOL_SEMICOLON_TOK = 12,             /* "';'"  */
   YYSYMBOL_COLON_TOK = 13,                 /* "':'"  */
   YYSYMBOL_LEFTPAREN_TOK = 14,             /* "'('"  */
@@ -534,10 +534,8 @@ static const char *yysymbol_name (yysymbol_kind_t yysymbol) YY_ATTRIBUTE_UNUSED;
 static const char *const yytname[] =
 {
   "\"end of file\"", "error", "\"invalid token\"", "\"'Start label'\"",
-  "\"'Print'\"", "\"'Number'\"", "\"'Identifier'\"",
-  "\"'Equals operator'\"", "\"'Addition operator'\"",
-  "\"'Minus operator'\"", "\"'Division operator'\"",
-  "\"'Multiplication operator'\"", "\"';'\"", "\"':'\"", "\"'('\"",
+  "\"'Print'\"", "\"'Number'\"", "\"'Identifier'\"", "\"'='\"", "\"'+'\"",
+  "\"'-'\"", "\"'/'\"", "\"'*'\"", "\"';'\"", "\"':'\"", "\"'('\"",
   "\"')'\"", "$accept", "program", "statements", "statement", "expression",
   "print_stmt", "assign_stmt", "add_expr", "var", YY_NULLPTR
 };
@@ -1365,7 +1363,7 @@ yyreduce:
                                               {
 				printf("%s\n", (yyvsp[-1].str));
 			}
-#line 1369 "./src/parser.c"
+#line 1367 "./src/parser.c"
     break;
 
   case 10: /* print_stmt: "'Print'" "'Number'" "';'"  */
@@ -1373,35 +1371,35 @@ yyreduce:
                                                           {
 				printf("%d\n", (yyvsp[-1].num));
 			}
-#line 1377 "./src/parser.c"
+#line 1375 "./src/parser.c"
     break;
 
-  case 11: /* assign_stmt: "'Identifier'" "'Equals operator'" "'Identifier'" "';'"  */
+  case 11: /* assign_stmt: "'Identifier'" "'='" "'Identifier'" "';'"  */
 #line 58 "./src/parser.y"
                                                           {
 				printf("%s had been assigned to %s\n", (yyvsp[-1].str), (yyvsp[-3].str));
 			}
-#line 1385 "./src/parser.c"
+#line 1383 "./src/parser.c"
     break;
 
-  case 12: /* assign_stmt: "'Identifier'" "'Equals operator'" "'Number'" "';'"  */
+  case 12: /* assign_stmt: "'Identifier'" "'='" "'Number'" "';'"  */
 #line 61 "./src/parser.y"
                                                                      {
 				printf("%d has been assigned to %s\n", (yyvsp[-1].num), (yyvsp[-3].str));	
 			}
-#line 1393 "./src/parser.c"
+#line 1391 "./src/parser.c"
     break;
 
-  case 13: /* add_expr: var "'Addition operator'" var  */
+  case 13: /* add_expr: var "'+'" var  */
 #line 66 "./src/parser.y"
                           {
 			printf("Addition expresssion\n");
 		}
-#line 1401 "./src/parser.c"
+#line 1399 "./src/parser.c"
     break;
 
 
-#line 1405 "./src/parser.c"
+#line 1403 "./src/parser.c"
 
       default: break;
     }

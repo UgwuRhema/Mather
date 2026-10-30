@@ -58,11 +58,11 @@ extern int yydebug;
     PRINT_TOK = 259,               /* "'Print'"  */
     NUM_TOK = 260,                 /* "'Number'"  */
     IDENT_TOK = 261,               /* "'Identifier'"  */
-    ASSIGN_TOK = 262,              /* "'Equals operator'"  */
-    ADD_TOK = 263,                 /* "'Addition operator'"  */
-    MINUS_TOK = 264,               /* "'Minus operator'"  */
-    DIV_TOK = 265,                 /* "'Division operator'"  */
-    MUL_TOK = 266,                 /* "'Multiplication operator'"  */
+    ASSIGN_TOK = 262,              /* "'='"  */
+    ADD_TOK = 263,                 /* "'+'"  */
+    MINUS_TOK = 264,               /* "'-'"  */
+    DIV_TOK = 265,                 /* "'/'"  */
+    MUL_TOK = 266,                 /* "'*'"  */
     SEMICOLON_TOK = 267,           /* "';'"  */
     COLON_TOK = 268,               /* "':'"  */
     LEFTPAREN_TOK = 269,           /* "'('"  */

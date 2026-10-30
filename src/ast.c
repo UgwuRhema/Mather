@@ -1,6 +1,7 @@
 #include "ast.h"
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 struct expr *
 expr_num(int value)

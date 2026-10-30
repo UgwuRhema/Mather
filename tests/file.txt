@@ -2,4 +2,4 @@ start:
 	print->HelloWorld;
 	x = 5;
 	y = x;
-	a + b
+	a + b;

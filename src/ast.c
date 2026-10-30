@@ -20,15 +20,30 @@ expr_ident(char *id)
 	if (!ne) return NULL;
 	ne->type = EXPR_IDENT;
 	ne->as.ident = strdup(id);
+	if (!ne->as.ident)
+	{
+		free(ne);
+		return NULL;
+	}
 	return ne;
 }
 
 struct expr *
 expr_binary(enum OP_TYPE t, struct expr *left, struct expr *right)
 {
-	if (left == NULL || right == NULL) return NULL;
+	if (left == NULL || right == NULL)
+	{
+		expr_free(left);
+		expr_free(right);
+		return NULL;
+	}
 	struct expr *ne = (struct expr *)malloc(sizeof(struct expr));
-	if (!ne) return NULL;
+	if (!ne)
+	{
+		expr_free(left);
+		expr_free(right);
+		return NULL;
+	}
 	ne->type = EXPR_BINARY;
 	ne->as.binary.op = t;
 	ne->as.binary.left = left;
@@ -57,7 +72,7 @@ expr_free(struct expr *e)
 			break;
 		default:
 			fprintf(stderr, "Invalid option while freeing expression node\n");
-			free((void *)e);
+			abort();
 			break;
 	}
 	return;

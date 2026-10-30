@@ -1398,8 +1398,32 @@ yyreduce:
 #line 1399 "./src/parser.c"
     break;
 
+  case 13: /* expr: expr "'+'" term  */
+#line 63 "./src/parser.y"
+                            { printf("Addition\n"); }
+#line 1405 "./src/parser.c"
+    break;
 
-#line 1403 "./src/parser.c"
+  case 14: /* expr: expr "'-'" term  */
+#line 64 "./src/parser.y"
+                              { printf("Subtraction\n"); }
+#line 1411 "./src/parser.c"
+    break;
+
+  case 16: /* term: term "'*'" factor  */
+#line 68 "./src/parser.y"
+                              { printf("Multiplication\n"); }
+#line 1417 "./src/parser.c"
+    break;
+
+  case 17: /* term: term "'/'" factor  */
+#line 69 "./src/parser.y"
+                              { printf("Division\n"); }
+#line 1423 "./src/parser.c"
+    break;
+
+
+#line 1427 "./src/parser.c"
 
       default: break;
     }

@@ -79,8 +79,11 @@ union YYSTYPE
 
 	char *str;
 	int num;
+	struct expr *expr;
+	struct stmt *stat;
+	struct tree *tree;
 
-#line 84 "./src/parser.h"
+#line 87 "./src/parser.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

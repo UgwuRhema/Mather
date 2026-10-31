@@ -72,10 +72,10 @@ struct stmt *stmt_assign(char *, struct expr *);//
 struct stmt *stmt_expr(struct expr *);//
 
 struct tree *tree_new(void);//
-void tree_add_stmt(struct tree *, struct stmt *);
+void tree_add_stmt(struct tree *, struct stmt *);//
 
 void expr_free(struct expr *);//
-void stmt_free(struct stmt *);
+void stmt_free(struct stmt *);//
 void tree_free(struct tree *);
 
 #endif

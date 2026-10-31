@@ -58,3 +58,22 @@ symbol_set(struct symbol_table *table, const char *name, int value)
 	table->count++;
 	return true;
 }
+
+bool
+symbol_get(const struct symbol_table *st, const char *k, int *val)
+{
+	if (!st || !k) return false;
+	/*another lookup*/
+	struct symbol *curr = st->head;
+	while (curr)
+	{
+		if (strcmp(k, curr->name) == 0)
+		{
+			/*we found it*/
+			*val = curr->value;
+			return true;
+		}
+		curr = curr->next;
+	}
+	return false;
+}

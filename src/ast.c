@@ -125,7 +125,7 @@ stmt_assign(char *id, struct expr *exp)
 struct stmt *
 stmt_expr(struct expr *e)
 {
-	if (e) return NULL;
+	if (!e) return NULL;
 	struct stmt *ns = (struct stmt *)malloc(sizeof(struct stmt));
 	if (!ns)
 	{

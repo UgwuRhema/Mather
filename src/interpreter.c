@@ -1,10 +1,12 @@
 #include <stdio.h>
 #include "parser.h"
+#include "ast.h"
 #include <string.h>
 #include <stdlib.h>
 #include <stdbool.h>
 
 extern FILE *yyin;
+extern struct tree *root;
 
 bool is_valid_mather_file(char *);
 
@@ -28,10 +30,20 @@ main(int argc, char *argv[])
 	{
 		fprintf(stderr, "Mather: Error: failed to load %s, it is not a Mather file'.math'\n"
 				, filename);
+		fclose(fd);
 		exit(1);
 	}
 	yyin = fd;
-	return yyparse();
+	/*we parse and get the return value, which is just zero*/
+	int result = yyparse();
+	/*let's clean here*/
+	if (root)
+	{
+		tree_free(root);
+		root = NULL;
+	}
+	fclose(fd);
+	return result;
 }
 
 bool

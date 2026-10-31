@@ -191,10 +191,10 @@ tree_add_stmt(struct tree *tree, struct stmt *stat)
 }
 
 struct stmt * 
-reverse_stmt_list(struct stmt *head)
+reverse_stmt_list(struct tree *tree)
 {
 	struct stmt *prev = NULL;
-	struct stmt *curr = head;
+	struct stmt *curr = tree->statements;
 	while (curr)
 	{
 		struct stmt *next = curr->next;

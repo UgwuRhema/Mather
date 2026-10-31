@@ -73,7 +73,7 @@ struct stmt *stmt_expr(struct expr *);//
 
 struct tree *tree_new(void);//
 void tree_add_stmt(struct tree *, struct stmt *);//
-struct stmt *reverse_stmt_list(struct stmt *);
+struct stmt *reverse_stmt_list(struct tree *);
 
 void expr_free(struct expr *);//
 void stmt_free(struct stmt *);//

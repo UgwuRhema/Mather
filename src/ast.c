@@ -137,3 +137,30 @@ stmt_expr(struct expr *e)
 	ns->next = NULL;
 	return ns;
 }
+
+void
+stmt_free(struct stmt *stat)
+{
+	if (!stat) return;
+	switch(stat->type)
+	{
+		case PRINT_STMT:
+			expr_free(stat->as.print);
+			free((void *)stat);
+			break;
+		case ASSIGN_STMT:
+			free((void *)stat->as.assign.name);
+			expr_free(stat->as.assign.value);
+			free((void *)stat);
+			break;
+		case EXPR_STMT:
+			expr_free(stat->as.expr);
+			free((void *)stat);
+			break;
+		default:
+			fprintf(stderr, "Abort due unknown Statement node type\n");
+			abort();
+			break;
+	}
+	return;
+}

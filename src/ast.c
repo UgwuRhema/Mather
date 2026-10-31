@@ -190,6 +190,21 @@ tree_add_stmt(struct tree *tree, struct stmt *stat)
 	tree->count++;
 }
 
+struct stmt * 
+reverse_stmt_list(struct stmt *head)
+{
+	struct stmt *prev = NULL;
+	struct stmt *curr = head;
+	while (curr)
+	{
+		struct stmt *next = curr->next;
+		curr->next = prev;
+		prev = curr;
+		curr = next;
+	}
+	return prev;
+}
+
 void
 tree_free(struct tree *tree)
 {

@@ -60,9 +60,9 @@ struct tree
 	struct stmt *statements;
 };
 
-struct expr *expr_num(int);
-struct expr *expr_ident(char *);
-struct expr *expr_binary(enum OP_TYPE, struct expr *, struct expr *);
+struct expr *expr_num(int);//
+struct expr *expr_ident(char *);//
+struct expr *expr_binary(enum OP_TYPE, struct expr *, struct expr *);//
 
 struct stmt *stmt_print(struct expr *);
 struct stmt *stmt_assign(char *, struct expr *);
@@ -71,7 +71,7 @@ struct stmt *stmt_expr(struct expr *);
 struct tree *tree_new(void);
 void tree_add_stmt(struct tree *, struct stmt *);
 
-void expr_free(struct expr *);
+void expr_free(struct expr *);//
 void stmt_free(struct stmt *);
 void tree_free(struct tree *);
 

@@ -31,6 +31,7 @@ expr_ident(char *id)
 struct expr *
 expr_binary(enum OP_TYPE t, struct expr *left, struct expr *right)
 {
+	/*if null why bother free them?*/
 	if (left == NULL || right == NULL)
 	{
 		expr_free(left);
@@ -76,4 +77,63 @@ expr_free(struct expr *e)
 			break;
 	}
 	return;
+}
+
+struct stmt *
+stmt_print(struct expr *print)
+{
+	if (!print) return NULL;
+	struct stmt *ns = (struct stmt *)malloc(sizeof(struct stmt));
+	if (!ns)
+	{
+		expr_free(print);
+		return NULL;
+	}
+	ns->type = PRINT_STMT;
+	ns->as.print = print;
+	ns->next = NULL;
+	return ns;
+}
+
+struct stmt *
+stmt_assign(char *id, struct expr *exp)
+{
+	if (!exp || !id)
+	{
+		expr_free(exp);
+		return NULL;
+	}
+	struct stmt *ns = (struct stmt *)malloc(sizeof(struct stmt));
+	if (!ns)
+	{
+		expr_free(exp);
+		return NULL;
+	}
+	ns->type = ASSIGN_STMT;
+	ns->as.assign.name = strdup(id);
+	if (!ns->as.assign.name)
+	{
+		free((void *)ns);
+		expr_free(exp);
+		return NULL;
+	}
+	ns->as.assign.value = exp;
+	ns->next = NULL;
+	return ns;
+}
+
+struct stmt *
+stmt_expr(struct expr *e)
+{
+	if (e) return NULL;
+	struct stmt *ns = (struct stmt *)malloc(sizeof(struct stmt));
+	if (!ns)
+	{
+		expr_free(e);
+		return NULL;
+	}
+	ns->type = EXPR_STMT;
+	ns->as.expr= e;
+	ns->next = NULL;
+	return ns;
 }

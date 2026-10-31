@@ -1372,8 +1372,8 @@ yyreduce:
   case 2: /* program: "'Start label'" "':'" statements  */
 #line 45 "./src/parser.y"
                                         {
-			(yyval.tree) = (yyvsp[0].tree);
-			root = (yyvsp[0].tree);
+			(yyval.tree) = reverse_stmt_list((yyvsp[0].tree));
+			root = reverse_stmt_list((yyvsp[0].tree));
 		}
 #line 1379 "./src/parser.c"
     break;

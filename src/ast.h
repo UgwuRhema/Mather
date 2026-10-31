@@ -1,6 +1,8 @@
 #ifndef MATHER_AST_H
 #define MATHER_AST_H
 
+#include <stddef.h>
+
 enum EXPR_TYPE
 {
 	EXPR_NUM,
@@ -58,6 +60,7 @@ struct stmt
 struct tree
 {
 	struct stmt *statements;
+	size_t count;
 };
 
 struct expr *expr_num(int);//

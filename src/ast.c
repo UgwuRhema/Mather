@@ -164,3 +164,13 @@ stmt_free(struct stmt *stat)
 	}
 	return;
 }
+
+struct tree *
+tree_new(void)
+{
+	struct tree *nt = (struct tree *)malloc(sizeof(struct tree));
+	if (!nt) return NULL;
+	nt->statements = NULL;
+	nt->count = 0;
+	return nt;
+}

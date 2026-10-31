@@ -174,3 +174,19 @@ tree_new(void)
 	nt->count = 0;
 	return nt;
 }
+
+void
+tree_add_stmt(struct tree *tree, struct stmt *stat)
+{
+	if (!tree || !stat)
+		return;
+	if (!tree->statements)
+	{
+		tree->statements = stat;
+		tree->count = 1;
+	}
+	/*else*/
+	stat->next = tree->statements;
+	tree->statements = stat;/*insert at head*/
+	tree->count++;
+}

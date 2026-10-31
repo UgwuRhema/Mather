@@ -183,10 +183,9 @@ tree_add_stmt(struct tree *tree, struct stmt *stat)
 	if (!tree->statements)
 	{
 		tree->statements = stat;
-		tree->count = 1;
+	} else {
+		stat->next = tree->statements;
+		tree->statements = stat;/*insert at head*/
 	}
-	/*else*/
-	stat->next = tree->statements;
-	tree->statements = stat;/*insert at head*/
 	tree->count++;
 }

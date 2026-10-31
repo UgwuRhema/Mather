@@ -76,8 +76,9 @@ int yylex(void);
 void yyerror(const char *s);
 extern char *yytext;
 extern int yylineno;
+struct tree *root = NULL;
 
-#line 81 "./src/parser.c"
+#line 82 "./src/parser.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -520,8 +521,8 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    44,    44,    49,    52,    58,    59,    60,    64,    70,
-      74,    75,    76,    79,    80,    81,    84,    85,    86
+       0,    45,    45,    51,    54,    60,    61,    62,    66,    72,
+      76,    77,    78,    81,    82,    83,    86,    87,    88
 };
 #endif
 
@@ -1369,120 +1370,121 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* program: "'Start label'" "':'" statements  */
-#line 44 "./src/parser.y"
+#line 45 "./src/parser.y"
                                         {
 			(yyval.tree) = (yyvsp[0].tree);
+			root = (yyvsp[0].tree);
 		}
-#line 1377 "./src/parser.c"
+#line 1379 "./src/parser.c"
     break;
 
   case 3: /* statements: %empty  */
-#line 49 "./src/parser.y"
+#line 51 "./src/parser.y"
                     {
 				(yyval.tree) = tree_new();
 			}
-#line 1385 "./src/parser.c"
+#line 1387 "./src/parser.c"
     break;
 
   case 4: /* statements: statements statement  */
-#line 52 "./src/parser.y"
+#line 54 "./src/parser.y"
                                          {
 				tree_add_stmt((yyvsp[-1].tree), (yyvsp[0].stat));
 				(yyval.tree) = (yyvsp[-1].tree);
 			}
-#line 1394 "./src/parser.c"
+#line 1396 "./src/parser.c"
     break;
 
   case 5: /* statement: print_stmt  */
-#line 58 "./src/parser.y"
+#line 60 "./src/parser.y"
                       { (yyval.stat) = (yyvsp[0].stat); }
-#line 1400 "./src/parser.c"
+#line 1402 "./src/parser.c"
     break;
 
   case 6: /* statement: assign_stmt  */
-#line 59 "./src/parser.y"
+#line 61 "./src/parser.y"
                                { (yyval.stat) = (yyvsp[0].stat); }
-#line 1406 "./src/parser.c"
+#line 1408 "./src/parser.c"
     break;
 
   case 7: /* statement: expr "';'"  */
-#line 60 "./src/parser.y"
+#line 62 "./src/parser.y"
                                       { (yyval.stat) = stmt_expr((yyvsp[-1].expr)); }
-#line 1412 "./src/parser.c"
+#line 1414 "./src/parser.c"
     break;
 
   case 8: /* print_stmt: "'Print'" "'<<'" expr "';'"  */
-#line 64 "./src/parser.y"
+#line 66 "./src/parser.y"
                                                         {
 				(yyval.stat) = stmt_print((yyvsp[-1].expr));	
 			}
-#line 1420 "./src/parser.c"
+#line 1422 "./src/parser.c"
     break;
 
   case 9: /* assign_stmt: "'Identifier'" "'='" expr "';'"  */
-#line 70 "./src/parser.y"
+#line 72 "./src/parser.y"
                                                      {
 				(yyval.stat) = stmt_assign((yyvsp[-3].str), (yyvsp[-1].expr));
 			}
-#line 1428 "./src/parser.c"
+#line 1430 "./src/parser.c"
     break;
 
   case 10: /* expr: term  */
-#line 74 "./src/parser.y"
+#line 76 "./src/parser.y"
            { (yyval.expr) = (yyvsp[0].expr); }
-#line 1434 "./src/parser.c"
+#line 1436 "./src/parser.c"
     break;
 
   case 11: /* expr: expr "'+'" term  */
-#line 75 "./src/parser.y"
+#line 77 "./src/parser.y"
                             { (yyval.expr) = expr_binary(OP_ADD, (yyvsp[-2].expr), (yyvsp[0].expr)); }
-#line 1440 "./src/parser.c"
+#line 1442 "./src/parser.c"
     break;
 
   case 12: /* expr: expr "'-'" term  */
-#line 76 "./src/parser.y"
+#line 78 "./src/parser.y"
                               { (yyval.expr) = expr_binary(OP_SUB, (yyvsp[-2].expr), (yyvsp[0].expr));}
-#line 1446 "./src/parser.c"
+#line 1448 "./src/parser.c"
     break;
 
   case 13: /* term: factor  */
-#line 79 "./src/parser.y"
+#line 81 "./src/parser.y"
              { (yyval.expr) = (yyvsp[0].expr); }
-#line 1452 "./src/parser.c"
+#line 1454 "./src/parser.c"
     break;
 
   case 14: /* term: term "'*'" factor  */
-#line 80 "./src/parser.y"
+#line 82 "./src/parser.y"
                               { (yyval.expr) = expr_binary(OP_MUL, (yyvsp[-2].expr), (yyvsp[0].expr)); }
-#line 1458 "./src/parser.c"
+#line 1460 "./src/parser.c"
     break;
 
   case 15: /* term: term "'/'" factor  */
-#line 81 "./src/parser.y"
+#line 83 "./src/parser.y"
                               { (yyval.expr) = expr_binary(OP_DIV, (yyvsp[-2].expr), (yyvsp[0].expr)); }
-#line 1464 "./src/parser.c"
+#line 1466 "./src/parser.c"
     break;
 
   case 16: /* factor: "'Number'"  */
-#line 84 "./src/parser.y"
+#line 86 "./src/parser.y"
                 { (yyval.expr) = expr_num((yyvsp[0].num)); }
-#line 1470 "./src/parser.c"
+#line 1472 "./src/parser.c"
     break;
 
   case 17: /* factor: "'Identifier'"  */
-#line 85 "./src/parser.y"
+#line 87 "./src/parser.y"
                       { (yyval.expr) = expr_ident((yyvsp[0].str)); }
-#line 1476 "./src/parser.c"
+#line 1478 "./src/parser.c"
     break;
 
   case 18: /* factor: "'('" expr "')'"  */
-#line 86 "./src/parser.y"
+#line 88 "./src/parser.y"
                                               { (yyval.expr) = (yyvsp[-1].expr); }
-#line 1482 "./src/parser.c"
+#line 1484 "./src/parser.c"
     break;
 
 
-#line 1486 "./src/parser.c"
+#line 1488 "./src/parser.c"
 
       default: break;
     }
@@ -1706,7 +1708,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 89 "./src/parser.y"
+#line 91 "./src/parser.y"
 
 
 void 

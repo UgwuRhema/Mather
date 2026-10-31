@@ -1,3 +1,4 @@
 start:
+	\\This is a comment
 	x = 5;
 	print << x;

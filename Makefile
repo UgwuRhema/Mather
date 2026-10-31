@@ -11,13 +11,14 @@ PAR_OUT := ./src/parser.c
 LEX := ./src/lexer.l
 LEX_OUT := ./src/lexer.c
 AST :=./src/ast.c
+SYM := ./src/symbol.c
 INT := ./src/interpreter.c
 INT_OUT := ./mather
 
 all: $(INT)
 	$(MAKE) -C . lex
 	$(MAKE) -C . parse
-	$(CC) $(CFLAGS) -o $(INT_OUT) $(INT) $(PAR_OUT) $(LEX_OUT) $(AST) -lfl
+	$(CC) $(CFLAGS) -o $(INT_OUT) $(INT) $(PAR_OUT) $(LEX_OUT) $(AST) $(SYM) -lfl
 
 lex:
 	$(F) -o $(LEX_OUT) $(LEX)

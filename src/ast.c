@@ -189,3 +189,17 @@ tree_add_stmt(struct tree *tree, struct stmt *stat)
 	}
 	tree->count++;
 }
+
+void
+tree_free(struct tree *tree)
+{
+	if (!tree) return;
+	struct stmt *s = tree->statements;
+	while (s)
+	{
+		struct stmt *n = s->next;
+		stmt_free(s);
+		s = n;
+	}
+	free((void *)tree);
+}

@@ -62,9 +62,9 @@ symbol_set(struct symbol_table *table, const char *name, int value)
 bool
 symbol_get(const struct symbol_table *st, const char *k, int *val)
 {
-	if (!st || !k) return false;
+	if (!st || !k || !val) return false;
 	/*another lookup*/
-	struct symbol *curr = st->head;
+	const struct symbol *curr = st->head;
 	while (curr)
 	{
 		if (strcmp(k, curr->name) == 0)

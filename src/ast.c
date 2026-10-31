@@ -193,6 +193,7 @@ tree_add_stmt(struct tree *tree, struct stmt *stat)
 struct stmt * 
 reverse_stmt_list(struct tree *tree)
 {
+	if (!tree) return NULL;
 	struct stmt *prev = NULL;
 	struct stmt *curr = tree->statements;
 	while (curr)

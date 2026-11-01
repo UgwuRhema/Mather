@@ -97,10 +97,17 @@ execute_stmt(struct stmt *stmt, struct symbol_table *symbols)
 bool
 execute_tree(struct tree *tree)
 {
-	/* TODO: create a symbol table, reverse the list exactly once with
-	 * tree->statements = reverse_stmt_list(tree);
-	 * execute each statement, then free the symbol table.
-	 */
-	(void)tree;
+	if (!tree) return false;
+	struct symbol_table *sym = symbol_table_new();
+	if (!sym)
+		return false;
+	tree->statements = reverse_stmt_list(tree);/*reverse the statement list*/
+	struct stmt *curr_stmt = tree->statements;
+	while (curr_stmt)
+	{
+		execute_stmt(curr_stmt, sym);
+		curr_stmt = curr_stmt->next;
+	}
+	symbol_table_free(sym);
 	return false;
 }

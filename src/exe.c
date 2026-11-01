@@ -1,4 +1,5 @@
 #include "exe.h"
+#include <stdio.h>
 
 bool
 eval_expr(struct expr *expr, struct symbol_table *symbols, int *out)
@@ -8,18 +9,43 @@ eval_expr(struct expr *expr, struct symbol_table *symbols, int *out)
 	{
 		case EXPR_NUM:
 			*out = expr->as.num;
-			break;
+			return true;
 		case EXPR_IDENT:
 			if (!symbol_get(symbols, expr->as.ident, out))
 			{
 				fprintf(stderr, "Mather: Error: Undeffined variable \"%s\"\n", expr->as.ident);
-				expr_free(expr);
-				symbol_table_free(symbols);
 				return false;
 			}
+			return true;
 		case EXPR_BINARY:
-			if (!eval_expr(expr->as.binary.left, symbols, out)) return false;
-			if (!eval_expr(expr->as.binary.right, symbols, out)) return false;
+			int left, right;
+			if (!eval_expr(expr->as.binary.left, symbols, &left)) return false;
+			if (!eval_expr(expr->as.binary.right, symbols, &right)) return false;
+			switch(expr->as.binary.op)
+			{
+				case OP_ADD:
+					*out = left + right;
+					break;
+				case OP_SUB:
+					*out = left - right;
+					break;
+				case OP_MUL:
+					*out = left * right;
+					break;
+				case OP_DIV:
+					if (right == 0)
+					{
+						fprintf(stderr, "Mather: Error: Division by zero\n");
+						return false;
+					}
+					*out = left / right;
+					break;
+				default:
+					return false;
+			}
+			return true;
+		default:
+			return false;
 	}
 	return false;
 }

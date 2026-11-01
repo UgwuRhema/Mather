@@ -53,13 +53,44 @@ eval_expr(struct expr *expr, struct symbol_table *symbols, int *out)
 bool
 execute_stmt(struct stmt *stmt, struct symbol_table *symbols)
 {
-	/* TODO: switch on stmt->type:
-	 * PRINT_STMT: evaluate stmt->as.print and print the value.
-	 * ASSIGN_STMT: evaluate stmt->as.assign.value, then call symbol_set.
-	 * EXPR_STMT: evaluate stmt->as.expr and discard the result.
-	 */
-	(void)stmt;
-	(void)symbols;
+	if (!stmt || !symbols) return false;
+	switch (stmt->type)
+	{
+		case PRINT_STMT:
+			int out;
+			if (!eval_expr(stmt->as.print, symbols, &out))
+			{
+				fprintf(stderr, "Mather: Error: Failed to evaluate the expression\n");
+				return false;
+			}
+			printf("%s", stmt->as.print->as.ident);
+			return true;
+		case ASSIGN_STMT:
+			int out2;
+			if (!eval_expr(stmt->as.assign.value, symbols, &out2))
+			{
+				fprintf(stderr, "Mather: Error: Failed to evaluate the expression\n");
+				return false;
+			}
+			/*add to symbol table so we can keep track of variables*/
+			if (!symbol_set(symbols, stmt->as.assign.name, out))
+			{
+				fprintf(stderr, "Mather: Error: Unable to assign value to variable\n");
+				return false;
+			}
+			return true;
+		case EXPR_STMT:
+			int out3;
+			if (!eval_expr(stmt->as.expr, symbols, &out3))
+			{
+				fprintf(stderr, "Mather: Error: Failed to evaluate the expression\n");
+				return false;
+			}
+			/*we don't use value*/
+			return true;
+		default:
+			return false;
+	}
 	return false;
 }
 

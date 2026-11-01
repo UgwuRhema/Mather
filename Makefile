@@ -14,11 +14,12 @@ AST :=./src/ast.c
 SYM := ./src/symbol.c
 INT := ./src/interpreter.c
 INT_OUT := ./mather
+EXE := ./src/exe.c
 
 all: $(INT)
 	$(MAKE) -C . lex
 	$(MAKE) -C . parse
-	$(CC) $(CFLAGS) -o $(INT_OUT) $(INT) $(PAR_OUT) $(LEX_OUT) $(AST) $(SYM) -lfl
+	$(CC) $(CFLAGS) -o $(INT_OUT) $(INT) $(PAR_OUT) $(LEX_OUT) $(AST) $(SYM) $(EXE) -lfl
 
 lex:
 	$(F) -o $(LEX_OUT) $(LEX)

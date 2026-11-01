@@ -63,7 +63,7 @@ execute_stmt(struct stmt *stmt, struct symbol_table *symbols)
 				fprintf(stderr, "Mather: Error: Failed to evaluate the expression\n");
 				return false;
 			}
-			printf("%s", stmt->as.print->as.ident);
+			printf("%d\n", out);
 			return true;
 		case ASSIGN_STMT:
 			int out2;
@@ -73,7 +73,7 @@ execute_stmt(struct stmt *stmt, struct symbol_table *symbols)
 				return false;
 			}
 			/*add to symbol table so we can keep track of variables*/
-			if (!symbol_set(symbols, stmt->as.assign.name, out))
+			if (!symbol_set(symbols, stmt->as.assign.name, out2))
 			{
 				fprintf(stderr, "Mather: Error: Unable to assign value to variable\n");
 				return false;

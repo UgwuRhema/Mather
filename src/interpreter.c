@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "parser.h"
 #include "ast.h"
+#include "exe.h"
 #include <string.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -36,6 +37,8 @@ main(int argc, char *argv[])
 	yyin = fd;
 	/*we parse and get the return value, which is just zero*/
 	int result = yyparse();
+	/*we execute here*/
+	execute_tree(root);
 	/*let's clean here*/
 	if (root)
 	{

@@ -1,3 +1,2 @@
 start:
-	x = 45 + 45;
-	print << x;
+	print << 5 * 5;

@@ -3,14 +3,24 @@
 bool
 eval_expr(struct expr *expr, struct symbol_table *symbols, int *out)
 {
-	/* TODO: switch on expr->type:
-	 * EXPR_NUM: assign expr->as.num to *out.
-	 * EXPR_IDENT: use symbol_get with expr->as.ident.
-	 * EXPR_BINARY: evaluate left and right, then apply expr->as.binary.op.
-	 */
-	(void)expr;
-	(void)symbols;
-	(void)out;
+	if (!expr || !symbols || !out) return false;
+	switch (expr->type)
+	{
+		case EXPR_NUM:
+			*out = expr->as.num;
+			break;
+		case EXPR_IDENT:
+			if (!symbol_get(symbols, expr->as.ident, out))
+			{
+				fprintf(stderr, "Mather: Error: Undeffined variable \"%s\"\n", expr->as.ident);
+				expr_free(expr);
+				symbol_table_free(symbols);
+				return false;
+			}
+		case EXPR_BINARY:
+			if (!eval_expr(expr->as.binary.left, symbols, out)) return false;
+			if (!eval_expr(expr->as.binary.right, symbols, out)) return false;
+	}
 	return false;
 }
 

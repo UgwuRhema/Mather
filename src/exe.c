@@ -105,9 +105,13 @@ execute_tree(struct tree *tree)
 	struct stmt *curr_stmt = tree->statements;
 	while (curr_stmt)
 	{
-		execute_stmt(curr_stmt, sym);
+		if (!execute_stmt(curr_stmt, sym))
+		{
+			fprintf(stderr, "Mather: Error: Failed to execute statement\n");
+			return false;
+		}
 		curr_stmt = curr_stmt->next;
 	}
 	symbol_table_free(sym);
-	return false;
+	return true;
 }

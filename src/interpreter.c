@@ -38,7 +38,14 @@ main(int argc, char *argv[])
 	/*we parse and get the return value, which is just zero*/
 	int result = yyparse();
 	/*we execute here*/
-	execute_tree(root);
+	if(!execute_tree(root))
+	{
+		fprintf(stderr, "Mather: Error: Failed to execute statements in tree\n");
+		tree_free(root);
+		root = NULL;
+		fclose(fd);
+		exit(1);
+	}
 	/*let's clean here*/
 	if (root)
 	{

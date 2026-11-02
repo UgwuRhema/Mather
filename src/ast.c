@@ -171,6 +171,10 @@ stmt_free(struct stmt *stat)
 			expr_free(stat->as.print);
 			free((void *)stat);
 			break;
+		case PRINT_STRING_STMT:
+			free((void *)stat->as.print_str);
+			free((void *)stat);
+			break;
 		case ASSIGN_STMT:
 			free((void *)stat->as.assign.name);
 			expr_free(stat->as.assign.value);

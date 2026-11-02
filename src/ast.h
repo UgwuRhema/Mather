@@ -13,6 +13,7 @@ enum EXPR_TYPE
 enum STMT_TYPE
 {
 	PRINT_STMT,
+	PRINT_STRING_STMT,
 	ASSIGN_STMT,
 	EXPR_STMT,
 };
@@ -47,6 +48,7 @@ struct stmt
 	union
 	{
 		struct expr *print;
+		char *print_str;
 		struct
 		{
 			char *name;
@@ -68,6 +70,7 @@ struct expr *expr_ident(char *);//
 struct expr *expr_binary(enum OP_TYPE, struct expr *, struct expr *);//
 
 struct stmt *stmt_print(struct expr *);//
+struct stmt *stmt_print_string(char *);
 struct stmt *stmt_assign(char *, struct expr *);//
 struct stmt *stmt_expr(struct expr *);//
 

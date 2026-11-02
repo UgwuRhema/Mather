@@ -95,6 +95,29 @@ stmt_print(struct expr *print)
 	return ns;
 }
 
+/*it is not like a print statement at all, and in Mather*/
+/*strings cannot be assigned to variables, only printed*/
+struct stmt *
+stmt_print_string(char *str)
+{
+	if (!str)
+		return NULL;
+	struct stmt *ns = (struct stmt *)malloc(sizeof(struct stmt));
+	if (!ns) return NULL;
+	ns->type = PRINT_STRING_STMT;
+	size_t len = strlen(str);
+	ns->as.print_str = (char *)malloc(len + 1);
+	if (!ns->as.print_str)
+	{
+		free((void *)ns);
+		return NULL;
+	}
+	strcpy(ns->as.print_str, str);
+	ns->as.print_str[len] = '\0';/*i think strcpy null terminates but just to be safe*/
+	ns->next = NULL;
+	return ns;
+}
+
 struct stmt *
 stmt_assign(char *id, struct expr *exp)
 {

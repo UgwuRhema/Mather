@@ -65,6 +65,12 @@ execute_stmt(struct stmt *stmt, struct symbol_table *symbols)
 			}
 			printf("%d\n", out);
 			return true;
+		case PRINT_STRING_STMT:
+			if (stmt->as.print_str != NULL) {
+				printf("%s\n", stmt->as.print_str);
+				return true;
+			}
+			return false;
 		case ASSIGN_STMT:
 			int out2;
 			if (!eval_expr(stmt->as.assign.value, symbols, &out2))

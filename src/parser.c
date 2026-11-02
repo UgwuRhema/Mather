@@ -522,7 +522,7 @@ static const yytype_int8 yytranslate[] =
 static const yytype_int8 yyrline[] =
 {
        0,    45,    45,    51,    54,    60,    61,    62,    66,    69,
-      76,    80,    81,    82,    85,    86,    87,    90,    91,    92
+      75,    79,    80,    81,    84,    85,    86,    89,    90,    91
 };
 #endif
 
@@ -1424,76 +1424,75 @@ yyreduce:
   case 9: /* print_stmt: "'Print'" "'String'" "';'"  */
 #line 69 "./src/parser.y"
                                                              {
-				printf("%s\n", (yyvsp[-1].str));
-				//$$ = stmt_print_string($2);?
+				(yyval.stat) = stmt_print_string((yyvsp[-1].str));
 			}
-#line 1431 "./src/parser.c"
+#line 1430 "./src/parser.c"
     break;
 
   case 10: /* assign_stmt: "'Identifier'" "'='" expr "';'"  */
-#line 76 "./src/parser.y"
+#line 75 "./src/parser.y"
                                                      {
 				(yyval.stat) = stmt_assign((yyvsp[-3].str), (yyvsp[-1].expr));
 			}
-#line 1439 "./src/parser.c"
+#line 1438 "./src/parser.c"
     break;
 
   case 11: /* expr: term  */
-#line 80 "./src/parser.y"
+#line 79 "./src/parser.y"
            { (yyval.expr) = (yyvsp[0].expr); }
-#line 1445 "./src/parser.c"
+#line 1444 "./src/parser.c"
     break;
 
   case 12: /* expr: expr "'+'" term  */
-#line 81 "./src/parser.y"
+#line 80 "./src/parser.y"
                             { (yyval.expr) = expr_binary(OP_ADD, (yyvsp[-2].expr), (yyvsp[0].expr)); }
-#line 1451 "./src/parser.c"
+#line 1450 "./src/parser.c"
     break;
 
   case 13: /* expr: expr "'-'" term  */
-#line 82 "./src/parser.y"
+#line 81 "./src/parser.y"
                               { (yyval.expr) = expr_binary(OP_SUB, (yyvsp[-2].expr), (yyvsp[0].expr));}
-#line 1457 "./src/parser.c"
+#line 1456 "./src/parser.c"
     break;
 
   case 14: /* term: factor  */
-#line 85 "./src/parser.y"
+#line 84 "./src/parser.y"
              { (yyval.expr) = (yyvsp[0].expr); }
-#line 1463 "./src/parser.c"
+#line 1462 "./src/parser.c"
     break;
 
   case 15: /* term: term "'*'" factor  */
-#line 86 "./src/parser.y"
+#line 85 "./src/parser.y"
                               { (yyval.expr) = expr_binary(OP_MUL, (yyvsp[-2].expr), (yyvsp[0].expr)); }
-#line 1469 "./src/parser.c"
+#line 1468 "./src/parser.c"
     break;
 
   case 16: /* term: term "'/'" factor  */
-#line 87 "./src/parser.y"
+#line 86 "./src/parser.y"
                               { (yyval.expr) = expr_binary(OP_DIV, (yyvsp[-2].expr), (yyvsp[0].expr)); }
-#line 1475 "./src/parser.c"
+#line 1474 "./src/parser.c"
     break;
 
   case 17: /* factor: "'Number'"  */
-#line 90 "./src/parser.y"
+#line 89 "./src/parser.y"
                 { (yyval.expr) = expr_num((yyvsp[0].num)); }
-#line 1481 "./src/parser.c"
+#line 1480 "./src/parser.c"
     break;
 
   case 18: /* factor: "'Identifier'"  */
-#line 91 "./src/parser.y"
+#line 90 "./src/parser.y"
                       { (yyval.expr) = expr_ident((yyvsp[0].str)); }
-#line 1487 "./src/parser.c"
+#line 1486 "./src/parser.c"
     break;
 
   case 19: /* factor: "'('" expr "')'"  */
-#line 92 "./src/parser.y"
+#line 91 "./src/parser.y"
                                               { (yyval.expr) = (yyvsp[-1].expr); }
-#line 1493 "./src/parser.c"
+#line 1492 "./src/parser.c"
     break;
 
 
-#line 1497 "./src/parser.c"
+#line 1496 "./src/parser.c"
 
       default: break;
     }
@@ -1717,7 +1716,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 95 "./src/parser.y"
+#line 94 "./src/parser.y"
 
 
 void 

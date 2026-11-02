@@ -57,19 +57,20 @@ extern int yydebug;
     START_TOK = 258,               /* "'Start label'"  */
     PRINT_TOK = 259,               /* "'Print'"  */
     NUM_TOK = 260,                 /* "'Number'"  */
-    IDENT_TOK = 261,               /* "'Identifier'"  */
-    ASSIGN_TOK = 262,              /* "'='"  */
-    ADD_TOK = 263,                 /* "'+'"  */
-    MINUS_TOK = 264,               /* "'-'"  */
-    DIV_TOK = 265,                 /* "'/'"  */
-    MUL_TOK = 266,                 /* "'*'"  */
-    SEMICOLON_TOK = 267,           /* "';'"  */
-    COLON_TOK = 268,               /* "':'"  */
-    LEFTPAREN_TOK = 269,           /* "'('"  */
-    RIGHTPAREN_TOK = 270,          /* "')'"  */
-    GTHAN_TOK = 271,               /* "'>'"  */
-    LTHAN_TOK = 272,               /* "'<'"  */
-    STRING_TOK = 273               /* "'String'"  */
+    FLT_TOK = 261,                 /* "'Decimal'"  */
+    IDENT_TOK = 262,               /* "'Identifier'"  */
+    ASSIGN_TOK = 263,              /* "'='"  */
+    ADD_TOK = 264,                 /* "'+'"  */
+    MINUS_TOK = 265,               /* "'-'"  */
+    DIV_TOK = 266,                 /* "'/'"  */
+    MUL_TOK = 267,                 /* "'*'"  */
+    SEMICOLON_TOK = 268,           /* "';'"  */
+    COLON_TOK = 269,               /* "':'"  */
+    LEFTPAREN_TOK = 270,           /* "'('"  */
+    RIGHTPAREN_TOK = 271,          /* "')'"  */
+    GTHAN_TOK = 272,               /* "'>'"  */
+    LTHAN_TOK = 273,               /* "'<'"  */
+    STRING_TOK = 274               /* "'String'"  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -78,15 +79,16 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 14 "./src/parser.y"
+#line 15 "./src/parser.y"
 
 	char *str;
 	int num;
+	double decimal;
 	struct expr *expr;
 	struct stmt *stat;
 	struct tree *tree;
 
-#line 90 "./src/parser.h"
+#line 92 "./src/parser.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

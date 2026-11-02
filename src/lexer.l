@@ -21,6 +21,11 @@
 	return NUM_TOK;
 }
 
+[0-9]+(\.[0-9]+)? {
+	yylval.decimal = atof(yytext);
+	return FLT_TOK;
+}
+
 "\\".* {
 	/* skip my comments */
 }

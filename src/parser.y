@@ -1,5 +1,6 @@
 %{
 #include <stdio.h>
+#include <stdlib.h>
 #include "ast.h"
 /* declarations */
 int yylex(void);
@@ -14,6 +15,7 @@ struct tree *root = NULL;
 %union {
 	char *str;
 	int num;
+	double decimal;
 	struct expr *expr;
 	struct stmt *stat;
 	struct tree *tree;
@@ -22,6 +24,7 @@ struct tree *root = NULL;
 %token START_TOK "'Start label'"
 %token PRINT_TOK "'Print'"
 %token <num> NUM_TOK "'Number'"
+%token <decimal> FLT_TOK "'Decimal'"
 %token <str> IDENT_TOK "'Identifier'"
 %token ASSIGN_TOK "'='"
 %token ADD_TOK "'+'"
@@ -76,10 +79,11 @@ assign_stmt: IDENT_TOK ASSIGN_TOK expr SEMICOLON_TOK {
 				$$ = stmt_assign($1, $3);
 			}
 			;
+
 expr: term { $$ = $1; }
 	| expr ADD_TOK term { $$ = expr_binary(OP_ADD, $1, $3); }
 	| expr MINUS_TOK term { $$ = expr_binary(OP_SUB, $1, $3);}
-	;
+;
 
 term: factor { $$ = $1; }
 	| term MUL_TOK factor { $$ = expr_binary(OP_MUL, $1, $3); }

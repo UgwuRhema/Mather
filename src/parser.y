@@ -14,8 +14,7 @@ struct tree *root = NULL;
 
 %union {
 	char *str;
-	int num;
-	double decimal;
+	double num;
 	struct expr *expr;
 	struct stmt *stat;
 	struct tree *tree;
@@ -24,7 +23,6 @@ struct tree *root = NULL;
 %token START_TOK "'Start label'"
 %token PRINT_TOK "'Print'"
 %token <num> NUM_TOK "'Number'"
-%token <decimal> FLT_TOK "'Decimal'"
 %token <str> IDENT_TOK "'Identifier'"
 %token ASSIGN_TOK "'='"
 %token ADD_TOK "'+'"

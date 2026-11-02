@@ -16,14 +16,9 @@
 	return PRINT_TOK;
 }
 
-[0-9]+ {
-	yylval.num = atoi(yytext);
-	return NUM_TOK;
-}
-
 [0-9]+(\.[0-9]+)? {
-	yylval.decimal = atof(yytext);
-	return FLT_TOK;
+	yylval.num = atof(yytext);
+	return NUM_TOK;
 }
 
 "\\".* {

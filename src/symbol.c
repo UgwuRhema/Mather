@@ -30,7 +30,7 @@ symbol_table_free(struct symbol_table *table)
 }
 
 bool
-symbol_set(struct symbol_table *table, const char *name, int value)
+symbol_set(struct symbol_table *table, const char *name, double value)
 {
 	if (!table || !name) return false;
 	struct symbol *curr = table->head;
@@ -60,7 +60,7 @@ symbol_set(struct symbol_table *table, const char *name, int value)
 }
 
 bool
-symbol_get(const struct symbol_table *st, const char *k, int *val)
+symbol_get(const struct symbol_table *st, const char *k, double *val)
 {
 	if (!st || !k || !val) return false;
 	/*another lookup*/

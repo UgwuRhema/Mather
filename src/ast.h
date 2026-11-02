@@ -31,7 +31,7 @@ struct expr
 	enum EXPR_TYPE type;
 	union
 	{
-		int num;
+		double num;
 		char *ident;
 		struct
 		{
@@ -65,7 +65,7 @@ struct tree
 	size_t count;
 };
 
-struct expr *expr_num(int);//
+struct expr *expr_num(double);//
 struct expr *expr_ident(char *);//
 struct expr *expr_binary(enum OP_TYPE, struct expr *, struct expr *);//
 

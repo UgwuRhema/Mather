@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 bool
-eval_expr(struct expr *expr, struct symbol_table *symbols, int *out)
+eval_expr(struct expr *expr, struct symbol_table *symbols, double *out)
 {
 	if (!expr || !symbols || !out) return false;
 	switch (expr->type)
@@ -18,7 +18,7 @@ eval_expr(struct expr *expr, struct symbol_table *symbols, int *out)
 			}
 			return true;
 		case EXPR_BINARY:
-			int left, right;
+			double left, right;
 			if (!eval_expr(expr->as.binary.left, symbols, &left)) return false;
 			if (!eval_expr(expr->as.binary.right, symbols, &right)) return false;
 			switch(expr->as.binary.op)
@@ -57,13 +57,13 @@ execute_stmt(struct stmt *stmt, struct symbol_table *symbols)
 	switch (stmt->type)
 	{
 		case PRINT_STMT:
-			int out;
+			double out;
 			if (!eval_expr(stmt->as.print, symbols, &out))
 			{
 				fprintf(stderr, "Mather: Error: Failed to evaluate the expression\n");
 				return false;
 			}
-			printf("%d\n", out);
+			printf("%g\n", out);
 			return true;
 		case PRINT_STRING_STMT:
 			if (stmt->as.print_str != NULL) {
@@ -72,7 +72,7 @@ execute_stmt(struct stmt *stmt, struct symbol_table *symbols)
 			}
 			return false;
 		case ASSIGN_STMT:
-			int out2;
+			double out2;
 			if (!eval_expr(stmt->as.assign.value, symbols, &out2))
 			{
 				fprintf(stderr, "Mather: Error: Failed to evaluate the expression\n");
@@ -86,7 +86,7 @@ execute_stmt(struct stmt *stmt, struct symbol_table *symbols)
 			}
 			return true;
 		case EXPR_STMT:
-			int out3;
+			double out3;
 			if (!eval_expr(stmt->as.expr, symbols, &out3))
 			{
 				fprintf(stderr, "Mather: Error: Failed to evaluate the expression\n");

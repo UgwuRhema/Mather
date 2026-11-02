@@ -5,7 +5,7 @@
 #include "ast.h"
 #include "symbol.h"
 
-bool eval_expr(struct expr *expr, struct symbol_table *symbols, int *out);
+bool eval_expr(struct expr *expr, struct symbol_table *symbols, double *out);
 bool execute_stmt(struct stmt *stmt, struct symbol_table *symbols);
 bool execute_tree(struct tree *tree);
 

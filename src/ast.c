@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 struct expr *
-expr_num(int value)
+expr_num(double value)
 {
 	struct expr *ne = (struct expr *)malloc(sizeof(struct expr));	
 	if (!ne) return NULL;

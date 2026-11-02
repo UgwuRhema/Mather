@@ -7,7 +7,7 @@
 struct symbol
 {
 	char *name;
-	int value;
+	double value;
 	struct symbol *next;
 };
 
@@ -19,7 +19,7 @@ struct symbol_table
 
 struct symbol_table *symbol_table_new(void);
 void symbol_table_free(struct symbol_table *);
-bool symbol_set(struct symbol_table *, const char *, int);
-bool symbol_get(const struct symbol_table *, const char *, int *);
+bool symbol_set(struct symbol_table *, const char *, double);
+bool symbol_get(const struct symbol_table *, const char *, double *);
 
 #endif

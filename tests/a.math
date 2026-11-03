@@ -1,7 +1,7 @@
 start:
 	print "Hello World";
 	print 5.5 * 5.5;
-	x = -5;
-	y = -5;
+	x = -5.50;
+	y = -5.00;
 	z = x + y;
 	print z;

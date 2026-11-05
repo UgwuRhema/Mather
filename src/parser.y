@@ -101,7 +101,7 @@ call_args: expr {
 			$$ = arglist_create();
 			arglist_push($$, $1); /*push the new expression onto the argument list*/
 		 }
-		 | call_args COMMA_TOK expr { arglist_push($1, $3); }
+		 | call_args COMMA_TOK expr { arglist_push($1, $3); $$ = $1; }
 		 ;
 
 %%

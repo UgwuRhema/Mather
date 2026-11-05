@@ -2,6 +2,7 @@
 #define MATHER_AST_H
 
 #include <stddef.h>
+#include <stdbool.h>
 
 enum EXPR_TYPE
 {
@@ -79,7 +80,7 @@ struct tree
 };
 
 struct arglist *arglist_create(void);//
-void arglist_push(struct arglist *, struct expr *);//
+bool arglist_push(struct arglist *, struct expr *);//
 
 struct expr *expr_num(double);//
 struct expr *expr_ident(char *);//

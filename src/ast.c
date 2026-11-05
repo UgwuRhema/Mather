@@ -14,25 +14,16 @@ arglist_create(void)
 	return narg;
 }
 
-void
+bool
 arglist_push(struct arglist *list, struct expr *expr)
 {
 	if (!list || !expr)
-		return;
-	if (!list->items) {
-		list->items = (struct expr **)malloc(sizeof(struct expr *));
-		if (!list->items)
-			return;
-		list->items[list->count++] = expr;
-		return;
-	}
-	list->items = (struct expr **)realloc(list->items, (list->count + 1) * sizeof(struct expr *));
-	if (!list->items)
-	{
-		fprintf(stderr, "Reallocation error!\n");
-		return;
-	}
+		return false;
+	struct expr **t = (struct expr **)realloc(list->items, (list->count + 1) * sizeof(*t));
+	if (!t) return false;
+	list->items = t;
 	list->items[list->count++] = expr;
+	return true;
 }
 
 struct expr *

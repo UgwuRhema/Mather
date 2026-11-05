@@ -3,6 +3,38 @@
 #include <string.h>
 #include <stdio.h>
 
+struct arglist *
+arglist_create(void)
+{
+	struct arglist *narg = (struct arglist *)malloc(sizeof(struct arglist));
+	if (!narg)
+		return NULL;
+	narg->items = NULL;
+	narg->count = 0;
+	return narg;
+}
+
+void
+arglist_push(struct arglist *list, struct expr *expr)
+{
+	if (!list || !expr)
+		return;
+	if (!list->items) {
+		list->items = (struct expr **)malloc(sizeof(struct expr *));
+		if (!list->items)
+			return;
+		list->items[list->count++] = expr;
+		return;
+	}
+	list->items = (struct expr **)realloc(list->items, (list->count + 1) * sizeof(struct expr *));
+	if (!list->items)
+	{
+		fprintf(stderr, "Reallocation error!\n");
+		return;
+	}
+	list->items[list->count++] = expr;
+}
+
 struct expr *
 expr_num(double value)
 {
@@ -49,6 +81,20 @@ expr_binary(enum OP_TYPE t, struct expr *left, struct expr *right)
 	ne->as.binary.op = t;
 	ne->as.binary.left = left;
 	ne->as.binary.right = right;
+	return ne;
+}
+
+struct expr *
+expr_call(char *name, struct arglist *args, size_t argc)
+{
+	if (!name || !args)
+		return NULL;
+	struct expr *ne = (struct expr *)malloc(sizeof(struct expr));
+	if (!ne) return NULL;
+	ne->type = EXPR_CALL;
+	ne->as.call.name = strdup(name);
+	ne->as.call.args = args;
+	ne->as.call.argc = argc;
 	return ne;
 }
 

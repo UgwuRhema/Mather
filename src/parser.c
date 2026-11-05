@@ -526,7 +526,7 @@ static const yytype_int8 yyrline[] =
 {
        0,    49,    49,    55,    58,    64,    65,    66,    70,    73,
       79,    84,    85,    86,    89,    90,    91,    94,    95,    96,
-      97,   100,   101
+      97,   100,   104
 };
 #endif
 
@@ -1504,24 +1504,27 @@ yyreduce:
 
   case 20: /* factor: "'Identifier'" "'('" call_args "')'"  */
 #line 97 "./src/parser.y"
-                                                             { (yyval.expr) = expr_call((yyvsp[-3].str), (yyvsp[-1].arg_list), n); }
+                                                             { (yyval.expr) = expr_call((yyvsp[-3].str), (yyvsp[-1].arglist), (yyvsp[-1].arglist)->count); }
 #line 1509 "./src/parser.c"
     break;
 
   case 21: /* call_args: expr  */
 #line 100 "./src/parser.y"
-                { (yyval.arg_list) = (yyvsp[0].expr); }
-#line 1515 "./src/parser.c"
+                {
+			(yyval.arglist) = arglist_create();
+			arglist_push((yyval.arglist), (yyvsp[0].expr)); /*push the new expression onto the argument list*/
+		 }
+#line 1518 "./src/parser.c"
     break;
 
   case 22: /* call_args: call_args "','" expr  */
-#line 101 "./src/parser.y"
-                                            { (yyval.arg_list) =  }
-#line 1521 "./src/parser.c"
+#line 104 "./src/parser.y"
+                                            { arglist_push((yyvsp[-2].arglist), (yyvsp[0].expr)); }
+#line 1524 "./src/parser.c"
     break;
 
 
-#line 1525 "./src/parser.c"
+#line 1528 "./src/parser.c"
 
       default: break;
     }
@@ -1745,7 +1748,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 104 "./src/parser.y"
+#line 107 "./src/parser.y"
 
 
 void 

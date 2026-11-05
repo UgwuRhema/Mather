@@ -78,6 +78,9 @@ struct tree
 	size_t count;
 };
 
+struct arglist *arglist_create(void);//
+void arglist_push(struct arglist *, struct expr *);//
+
 struct expr *expr_num(double);//
 struct expr *expr_ident(char *);//
 struct expr *expr_binary(enum OP_TYPE, struct expr *, struct expr *);//

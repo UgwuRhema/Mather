@@ -86,7 +86,7 @@ union YYSTYPE
 	struct expr *expr;
 	struct stmt *stat;
 	struct tree *tree;
-	struct expr **arg_list;
+	struct arglist *arglist;
 
 #line 92 "./src/parser.h"
 

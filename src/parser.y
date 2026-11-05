@@ -94,11 +94,14 @@ term: factor { $$ = $1; }
 factor: NUM_TOK { $$ = expr_num($1); }
 	  | IDENT_TOK { $$ = expr_ident($1); }
 	  | LEFTPAREN_TOK expr RIGHTPAREN_TOK { $$ = $2; }
-	  | IDENT_TOK LEFTPAREN_TOK call_args RIGHTPAREN_TOK { $$ = expr_call($1, $3, n); }
+	  | IDENT_TOK LEFTPAREN_TOK call_args RIGHTPAREN_TOK { $$ = expr_call($1, $3, $3->count); }
 	  ;
 
-call_args: expr { $$ = $1; }
-		 | call_args COMMA_TOK expr { $$ =  }
+call_args: expr {
+			$$ = arglist_create();
+			arglist_push($$, $1); /*push the new expression onto the argument list*/
+		 }
+		 | call_args COMMA_TOK expr { arglist_push($1, $3); }
 		 ;
 
 %%

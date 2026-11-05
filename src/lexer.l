@@ -12,8 +12,12 @@
 	return START_TOK;
 }
 
-"print " {
+"print" {
 	return PRINT_TOK;
+}
+
+"funct" {
+	return FUNC_TOK;
 }
 
 "-"?[0-9]+(\.[0-9]+)? {

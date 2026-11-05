@@ -36,6 +36,7 @@ struct tree *root = NULL;
 %token GTHAN_TOK "'>'"
 %token LTHAN_TOK "'<'"
 %token <str>STRING_TOK "'String'"
+%token FUNC_TOK "'Function Declaration'"
 
 %type <expr> expr term factor
 %type <stat> statement print_stmt assign_stmt

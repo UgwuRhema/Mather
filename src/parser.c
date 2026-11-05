@@ -1504,7 +1504,7 @@ yyreduce:
 
   case 20: /* factor: "'Identifier'" "'('" call_args "')'"  */
 #line 97 "./src/parser.y"
-                                                             { (yyval.expr) = expr_call((yyvsp[-3].str), (yyvsp[-1].arglist), (yyvsp[-1].arglist)->count); }
+                                                             { (yyval.expr) = expr_call((yyvsp[-3].str), (yyvsp[-1].arglist)); }
 #line 1509 "./src/parser.c"
     break;
 

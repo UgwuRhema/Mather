@@ -85,7 +85,7 @@ bool arglist_push(struct arglist *, struct expr *);//
 struct expr *expr_num(double);//
 struct expr *expr_ident(char *);//
 struct expr *expr_binary(enum OP_TYPE, struct expr *, struct expr *);//
-struct expr *expr_call(char *, struct arglist *, size_t);
+struct expr *expr_call(char *, struct arglist *);
 
 struct stmt *stmt_print(struct expr *);//
 struct stmt *stmt_print_string(char *);

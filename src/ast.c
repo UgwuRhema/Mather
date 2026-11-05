@@ -89,7 +89,7 @@ expr_binary(enum OP_TYPE t, struct expr *left, struct expr *right)
 }
 
 struct expr *
-expr_call(char *name, struct arglist *args, size_t argc)
+expr_call(char *name, struct arglist *args)
 {
 	if (!name || !args)
 		return NULL;
@@ -98,7 +98,7 @@ expr_call(char *name, struct arglist *args, size_t argc)
 	ne->type = EXPR_CALL;
 	ne->as.call.name = name;
 	ne->as.call.args = args;
-	ne->as.call.argc = argc;
+	ne->as.call.argc = args->count;
 	return ne;
 }
 

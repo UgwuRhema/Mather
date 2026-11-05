@@ -43,10 +43,16 @@ struct expr
 		struct 
 		{
 			char *name;
-			struct expr **args;
+			struct arglist *args;
 			size_t argc;
 		} call;
 	} as;
+};
+
+struct arglist
+{
+	struct expr **items;
+	size_t count;
 };
 
 struct stmt
@@ -75,7 +81,7 @@ struct tree
 struct expr *expr_num(double);//
 struct expr *expr_ident(char *);//
 struct expr *expr_binary(enum OP_TYPE, struct expr *, struct expr *);//
-struct expr *expr_call(char *, struct expr **, size_t);
+struct expr *expr_call(char *, struct arglist *, size_t);
 
 struct stmt *stmt_print(struct expr *);//
 struct stmt *stmt_print_string(char *);

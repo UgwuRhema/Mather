@@ -18,7 +18,7 @@ struct tree *root = NULL;
 	struct expr *expr;
 	struct stmt *stat;
 	struct tree *tree;
-	struct expr **arg_list;
+	struct arglist *arglist;
 }
 
 %token START_TOK "'Start label'"
@@ -40,7 +40,7 @@ struct tree *root = NULL;
 %token COMMA_TOK "','"
 
 %type <expr> expr term factor
-%type <arg_list> call_args
+%type <arglist> call_args
 %type <stat> statement print_stmt assign_stmt
 %type <tree> program statements
 

@@ -70,7 +70,7 @@ extern int yydebug;
     GTHAN_TOK = 271,               /* "'>'"  */
     LTHAN_TOK = 272,               /* "'<'"  */
     STRING_TOK = 273,              /* "'String'"  */
-    FUNC_TOK = 274                 /* "'Function Declaration'"  */
+    COMMA_TOK = 274                /* "','"  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -86,8 +86,9 @@ union YYSTYPE
 	struct expr *expr;
 	struct stmt *stat;
 	struct tree *tree;
+	struct expr **arg_list;
 
-#line 91 "./src/parser.h"
+#line 92 "./src/parser.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

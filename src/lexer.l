@@ -16,10 +16,6 @@
 	return PRINT_TOK;
 }
 
-"funct" {
-	return FUNC_TOK;
-}
-
 "-"?[0-9]+(\.[0-9]+)? {
 	yylval.num = atof(yytext);
 	return NUM_TOK;
@@ -54,8 +50,9 @@
 ":" { return COLON_TOK; }
 "(" { return LEFTPAREN_TOK; }
 ")" { return RIGHTPAREN_TOK; }
-">"  { return GTHAN_TOK; }
-"<"  { return LTHAN_TOK; }
+">" { return GTHAN_TOK; }
+"<" { return LTHAN_TOK; }
+"," { return COMMA_TOK; }
 
 . { fprintf(stderr, "Mather: Error, Unknown character '%s'\n", yytext); }
 

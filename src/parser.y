@@ -36,9 +36,9 @@ struct tree *root = NULL;
 %token GTHAN_TOK "'>'"
 %token LTHAN_TOK "'<'"
 %token <str>STRING_TOK "'String'"
-%token FUNC_TOK "'Function Declaration'"
+%token COMMA_TOK "','"
 
-%type <expr> expr term factor
+%type <expr> expr term factor call_args
 %type <stat> statement print_stmt assign_stmt
 %type <tree> program statements
 
@@ -92,6 +92,7 @@ term: factor { $$ = $1; }
 factor: NUM_TOK { $$ = expr_num($1); }
 	  | IDENT_TOK { $$ = expr_ident($1); }
 	  | LEFTPAREN_TOK expr RIGHTPAREN_TOK { $$ = $2; }
+	  | IDENT_TOK LEFTPAREN_TOK call_args RIGHTPAREN_TOK { /*$$ = expr_call($1, $3, n); */ }
 	  ;
 
 %%

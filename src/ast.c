@@ -26,6 +26,19 @@ arglist_push(struct arglist *list, struct expr *expr)
 	return true;
 }
 
+void
+arglist_free(struct arglist *ptr)
+{
+	if (!ptr) return;
+	if (ptr->items)
+	{
+		for (size_t i=0;i<ptr->count;++i)
+			expr_free(ptr->items[i]);
+		free((void *)ptr->items);
+	}
+	free((void *)ptr);
+}
+
 struct expr *
 expr_num(double value)
 {
@@ -83,7 +96,7 @@ expr_call(char *name, struct arglist *args, size_t argc)
 	struct expr *ne = (struct expr *)malloc(sizeof(struct expr));
 	if (!ne) return NULL;
 	ne->type = EXPR_CALL;
-	ne->as.call.name = strdup(name);
+	ne->as.call.name = name;
 	ne->as.call.args = args;
 	ne->as.call.argc = argc;
 	return ne;
@@ -106,6 +119,11 @@ expr_free(struct expr *e)
 		case EXPR_BINARY:
 			expr_free(e->as.binary.left);
 			expr_free(e->as.binary.right);
+			free((void *)e);
+			break;
+		case EXPR_CALL:
+			free((void *)e->as.call.name);
+			arglist_free(e->as.call.args);
 			free((void *)e);
 			break;
 		default:

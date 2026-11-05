@@ -1519,7 +1519,7 @@ yyreduce:
 
   case 22: /* call_args: call_args "','" expr  */
 #line 104 "./src/parser.y"
-                                            { arglist_push((yyvsp[-2].arglist), (yyvsp[0].expr)); }
+                                            { arglist_push((yyvsp[-2].arglist), (yyvsp[0].expr)); (yyval.arglist) = (yyvsp[-2].arglist); }
 #line 1524 "./src/parser.c"
     break;
 

@@ -69,7 +69,8 @@ extern int yydebug;
     RIGHTPAREN_TOK = 270,          /* "')'"  */
     GTHAN_TOK = 271,               /* "'>'"  */
     LTHAN_TOK = 272,               /* "'<'"  */
-    STRING_TOK = 273               /* "'String'"  */
+    STRING_TOK = 273,              /* "'String'"  */
+    FUNC_TOK = 274                 /* "'Function Declaration'"  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -86,7 +87,7 @@ union YYSTYPE
 	struct stmt *stat;
 	struct tree *tree;
 
-#line 90 "./src/parser.h"
+#line 91 "./src/parser.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

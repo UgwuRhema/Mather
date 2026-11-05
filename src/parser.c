@@ -126,15 +126,16 @@ enum yysymbol_kind_t
   YYSYMBOL_GTHAN_TOK = 16,                 /* "'>'"  */
   YYSYMBOL_LTHAN_TOK = 17,                 /* "'<'"  */
   YYSYMBOL_STRING_TOK = 18,                /* "'String'"  */
-  YYSYMBOL_YYACCEPT = 19,                  /* $accept  */
-  YYSYMBOL_program = 20,                   /* program  */
-  YYSYMBOL_statements = 21,                /* statements  */
-  YYSYMBOL_statement = 22,                 /* statement  */
-  YYSYMBOL_print_stmt = 23,                /* print_stmt  */
-  YYSYMBOL_assign_stmt = 24,               /* assign_stmt  */
-  YYSYMBOL_expr = 25,                      /* expr  */
-  YYSYMBOL_term = 26,                      /* term  */
-  YYSYMBOL_factor = 27                     /* factor  */
+  YYSYMBOL_FUNC_TOK = 19,                  /* "'Function Declaration'"  */
+  YYSYMBOL_YYACCEPT = 20,                  /* $accept  */
+  YYSYMBOL_program = 21,                   /* program  */
+  YYSYMBOL_statements = 22,                /* statements  */
+  YYSYMBOL_statement = 23,                 /* statement  */
+  YYSYMBOL_print_stmt = 24,                /* print_stmt  */
+  YYSYMBOL_assign_stmt = 25,               /* assign_stmt  */
+  YYSYMBOL_expr = 26,                      /* expr  */
+  YYSYMBOL_term = 27,                      /* term  */
+  YYSYMBOL_factor = 28                     /* factor  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -465,7 +466,7 @@ union yyalloc
 #define YYLAST   36
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  19
+#define YYNTOKENS  20
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  9
 /* YYNRULES -- Number of rules.  */
@@ -474,7 +475,7 @@ union yyalloc
 #define YYNSTATES  35
 
 /* YYMAXUTOK -- Last valid token kind.  */
-#define YYMAXUTOK   273
+#define YYMAXUTOK   274
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -515,15 +516,15 @@ static const yytype_int8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
-      15,    16,    17,    18
+      15,    16,    17,    18,    19
 };
 
 #if YYDEBUG
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    46,    46,    52,    55,    61,    62,    63,    67,    70,
-      76,    81,    82,    83,    86,    87,    88,    91,    92,    93
+       0,    47,    47,    53,    56,    62,    63,    64,    68,    71,
+      77,    82,    83,    84,    87,    88,    89,    92,    93,    94
 };
 #endif
 
@@ -542,9 +543,9 @@ static const char *const yytname[] =
   "\"end of file\"", "error", "\"invalid token\"", "\"'Start label'\"",
   "\"'Print'\"", "\"'Number'\"", "\"'Identifier'\"", "\"'='\"", "\"'+'\"",
   "\"'-'\"", "\"'/'\"", "\"'*'\"", "\"';'\"", "\"':'\"", "\"'('\"",
-  "\"')'\"", "\"'>'\"", "\"'<'\"", "\"'String'\"", "$accept", "program",
-  "statements", "statement", "print_stmt", "assign_stmt", "expr", "term",
-  "factor", YY_NULLPTR
+  "\"')'\"", "\"'>'\"", "\"'<'\"", "\"'String'\"",
+  "\"'Function Declaration'\"", "$accept", "program", "statements",
+  "statement", "print_stmt", "assign_stmt", "expr", "term", "factor", YY_NULLPTR
 };
 
 static const char *
@@ -620,17 +621,17 @@ static const yytype_int8 yycheck[] =
    state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,     3,    20,    13,     0,    21,     4,     5,     6,    14,
-      22,    23,    24,    25,    26,    27,     6,    18,    25,     7,
-      25,     8,     9,    12,    10,    11,    12,    12,    25,    15,
-      26,    26,    27,    27,    12
+       0,     3,    21,    13,     0,    22,     4,     5,     6,    14,
+      23,    24,    25,    26,    27,    28,     6,    18,    26,     7,
+      26,     8,     9,    12,    10,    11,    12,    12,    26,    15,
+      27,    27,    28,    28,    12
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    19,    20,    21,    21,    22,    22,    22,    23,    23,
-      24,    25,    25,    25,    26,    26,    26,    27,    27,    27
+       0,    20,    21,    22,    22,    23,    23,    23,    24,    24,
+      25,    26,    26,    26,    27,    27,    27,    28,    28,    28
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
@@ -1371,129 +1372,129 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* program: "'Start label'" "':'" statements  */
-#line 46 "./src/parser.y"
+#line 47 "./src/parser.y"
                                         {
 			(yyval.tree) = (yyvsp[0].tree);
 			root = (yyvsp[0].tree);
 		}
-#line 1380 "./src/parser.c"
+#line 1381 "./src/parser.c"
     break;
 
   case 3: /* statements: %empty  */
-#line 52 "./src/parser.y"
+#line 53 "./src/parser.y"
                     {
 				(yyval.tree) = tree_new();
 			}
-#line 1388 "./src/parser.c"
+#line 1389 "./src/parser.c"
     break;
 
   case 4: /* statements: statements statement  */
-#line 55 "./src/parser.y"
+#line 56 "./src/parser.y"
                                          {
 				tree_add_stmt((yyvsp[-1].tree), (yyvsp[0].stat));
 				(yyval.tree) = (yyvsp[-1].tree);
 			}
-#line 1397 "./src/parser.c"
+#line 1398 "./src/parser.c"
     break;
 
   case 5: /* statement: print_stmt  */
-#line 61 "./src/parser.y"
+#line 62 "./src/parser.y"
                       { (yyval.stat) = (yyvsp[0].stat); }
-#line 1403 "./src/parser.c"
+#line 1404 "./src/parser.c"
     break;
 
   case 6: /* statement: assign_stmt  */
-#line 62 "./src/parser.y"
+#line 63 "./src/parser.y"
                                { (yyval.stat) = (yyvsp[0].stat); }
-#line 1409 "./src/parser.c"
+#line 1410 "./src/parser.c"
     break;
 
   case 7: /* statement: expr "';'"  */
-#line 63 "./src/parser.y"
+#line 64 "./src/parser.y"
                                       { (yyval.stat) = stmt_expr((yyvsp[-1].expr)); }
-#line 1415 "./src/parser.c"
+#line 1416 "./src/parser.c"
     break;
 
   case 8: /* print_stmt: "'Print'" expr "';'"  */
-#line 67 "./src/parser.y"
+#line 68 "./src/parser.y"
                                          {
 				(yyval.stat) = stmt_print((yyvsp[-1].expr));	
 			}
-#line 1423 "./src/parser.c"
+#line 1424 "./src/parser.c"
     break;
 
   case 9: /* print_stmt: "'Print'" "'String'" "';'"  */
-#line 70 "./src/parser.y"
+#line 71 "./src/parser.y"
                                                              {
 				(yyval.stat) = stmt_print_string((yyvsp[-1].str));
 			}
-#line 1431 "./src/parser.c"
+#line 1432 "./src/parser.c"
     break;
 
   case 10: /* assign_stmt: "'Identifier'" "'='" expr "';'"  */
-#line 76 "./src/parser.y"
+#line 77 "./src/parser.y"
                                                      {
 				(yyval.stat) = stmt_assign((yyvsp[-3].str), (yyvsp[-1].expr));
 			}
-#line 1439 "./src/parser.c"
+#line 1440 "./src/parser.c"
     break;
 
   case 11: /* expr: term  */
-#line 81 "./src/parser.y"
+#line 82 "./src/parser.y"
            { (yyval.expr) = (yyvsp[0].expr); }
-#line 1445 "./src/parser.c"
+#line 1446 "./src/parser.c"
     break;
 
   case 12: /* expr: expr "'+'" term  */
-#line 82 "./src/parser.y"
+#line 83 "./src/parser.y"
                             { (yyval.expr) = expr_binary(OP_ADD, (yyvsp[-2].expr), (yyvsp[0].expr)); }
-#line 1451 "./src/parser.c"
+#line 1452 "./src/parser.c"
     break;
 
   case 13: /* expr: expr "'-'" term  */
-#line 83 "./src/parser.y"
+#line 84 "./src/parser.y"
                               { (yyval.expr) = expr_binary(OP_SUB, (yyvsp[-2].expr), (yyvsp[0].expr));}
-#line 1457 "./src/parser.c"
+#line 1458 "./src/parser.c"
     break;
 
   case 14: /* term: factor  */
-#line 86 "./src/parser.y"
+#line 87 "./src/parser.y"
              { (yyval.expr) = (yyvsp[0].expr); }
-#line 1463 "./src/parser.c"
+#line 1464 "./src/parser.c"
     break;
 
   case 15: /* term: term "'*'" factor  */
-#line 87 "./src/parser.y"
+#line 88 "./src/parser.y"
                               { (yyval.expr) = expr_binary(OP_MUL, (yyvsp[-2].expr), (yyvsp[0].expr)); }
-#line 1469 "./src/parser.c"
+#line 1470 "./src/parser.c"
     break;
 
   case 16: /* term: term "'/'" factor  */
-#line 88 "./src/parser.y"
+#line 89 "./src/parser.y"
                               { (yyval.expr) = expr_binary(OP_DIV, (yyvsp[-2].expr), (yyvsp[0].expr)); }
-#line 1475 "./src/parser.c"
+#line 1476 "./src/parser.c"
     break;
 
   case 17: /* factor: "'Number'"  */
-#line 91 "./src/parser.y"
+#line 92 "./src/parser.y"
                 { (yyval.expr) = expr_num((yyvsp[0].num)); }
-#line 1481 "./src/parser.c"
+#line 1482 "./src/parser.c"
     break;
 
   case 18: /* factor: "'Identifier'"  */
-#line 92 "./src/parser.y"
+#line 93 "./src/parser.y"
                       { (yyval.expr) = expr_ident((yyvsp[0].str)); }
-#line 1487 "./src/parser.c"
+#line 1488 "./src/parser.c"
     break;
 
   case 19: /* factor: "'('" expr "')'"  */
-#line 93 "./src/parser.y"
+#line 94 "./src/parser.y"
                                               { (yyval.expr) = (yyvsp[-1].expr); }
-#line 1493 "./src/parser.c"
+#line 1494 "./src/parser.c"
     break;
 
 
-#line 1497 "./src/parser.c"
+#line 1498 "./src/parser.c"
 
       default: break;
     }
@@ -1717,7 +1718,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 96 "./src/parser.y"
+#line 97 "./src/parser.y"
 
 
 void 

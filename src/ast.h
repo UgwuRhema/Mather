@@ -8,6 +8,7 @@ enum EXPR_TYPE
 	EXPR_NUM,
 	EXPR_IDENT,
 	EXPR_BINARY,
+	EXPR_CALL,
 };
 
 enum STMT_TYPE
@@ -39,6 +40,12 @@ struct expr
 			struct expr *left;
 			struct expr *right;
 		} binary;
+		struct 
+		{
+			char *name;
+			struct expr **args;
+			size_t argc;
+		} call;
 	} as;
 };
 
@@ -68,6 +75,7 @@ struct tree
 struct expr *expr_num(double);//
 struct expr *expr_ident(char *);//
 struct expr *expr_binary(enum OP_TYPE, struct expr *, struct expr *);//
+struct expr *expr_call(char *, struct expr **, size_t);
 
 struct stmt *stmt_print(struct expr *);//
 struct stmt *stmt_print_string(char *);
@@ -81,5 +89,4 @@ struct stmt *reverse_stmt_list(struct tree *);
 void expr_free(struct expr *);//
 void stmt_free(struct stmt *);//
 void tree_free(struct tree *);
-
 #endif

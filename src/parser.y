@@ -18,6 +18,7 @@ struct tree *root = NULL;
 	struct expr *expr;
 	struct stmt *stat;
 	struct tree *tree;
+	struct expr **arg_list;
 }
 
 %token START_TOK "'Start label'"
@@ -38,7 +39,8 @@ struct tree *root = NULL;
 %token <str>STRING_TOK "'String'"
 %token COMMA_TOK "','"
 
-%type <expr> expr term factor call_args
+%type <expr> expr term factor
+%type <arg_list> call_args
 %type <stat> statement print_stmt assign_stmt
 %type <tree> program statements
 
@@ -92,8 +94,12 @@ term: factor { $$ = $1; }
 factor: NUM_TOK { $$ = expr_num($1); }
 	  | IDENT_TOK { $$ = expr_ident($1); }
 	  | LEFTPAREN_TOK expr RIGHTPAREN_TOK { $$ = $2; }
-	  | IDENT_TOK LEFTPAREN_TOK call_args RIGHTPAREN_TOK { /*$$ = expr_call($1, $3, n); */ }
+	  | IDENT_TOK LEFTPAREN_TOK call_args RIGHTPAREN_TOK { $$ = expr_call($1, $3, n); }
 	  ;
+
+call_args: expr { $$ = $1; }
+		 | call_args COMMA_TOK expr { $$ =  }
+		 ;
 
 %%
 

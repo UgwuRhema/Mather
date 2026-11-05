@@ -526,7 +526,7 @@ static const yytype_int8 yyrline[] =
 {
        0,    49,    49,    55,    58,    64,    65,    66,    70,    73,
       79,    84,    85,    86,    89,    90,    91,    94,    95,    96,
-      97,   100,   104
+      97,   100,   107
 };
 #endif
 
@@ -1512,19 +1512,28 @@ yyreduce:
 #line 100 "./src/parser.y"
                 {
 			(yyval.arglist) = arglist_create();
-			arglist_push((yyval.arglist), (yyvsp[0].expr)); /*push the new expression onto the argument list*/
+			if(!arglist_push((yyval.arglist), (yyvsp[0].expr))) /*push the new expression onto the argument list*/
+			{
+				fprintf(stderr, "Mather: Parser Error: Failed to push expr unto arglist\n");
+			}
 		 }
-#line 1518 "./src/parser.c"
+#line 1521 "./src/parser.c"
     break;
 
   case 22: /* call_args: call_args "','" expr  */
-#line 104 "./src/parser.y"
-                                            { arglist_push((yyvsp[-2].arglist), (yyvsp[0].expr)); (yyval.arglist) = (yyvsp[-2].arglist); }
-#line 1524 "./src/parser.c"
+#line 107 "./src/parser.y"
+                                            { 
+			if (!arglist_push((yyvsp[-2].arglist), (yyvsp[0].expr)))
+			{
+				fprintf(stderr, "Mather: Parser Error: Failed to push new expr onto arglist\n");
+			}
+			(yyval.arglist) = (yyvsp[-2].arglist);
+		 }
+#line 1533 "./src/parser.c"
     break;
 
 
-#line 1528 "./src/parser.c"
+#line 1537 "./src/parser.c"
 
       default: break;
     }
@@ -1748,7 +1757,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 107 "./src/parser.y"
+#line 116 "./src/parser.y"
 
 
 void 

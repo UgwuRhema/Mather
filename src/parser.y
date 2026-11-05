@@ -99,9 +99,18 @@ factor: NUM_TOK { $$ = expr_num($1); }
 
 call_args: expr {
 			$$ = arglist_create();
-			arglist_push($$, $1); /*push the new expression onto the argument list*/
+			if(!arglist_push($$, $1)) /*push the new expression onto the argument list*/
+			{
+				fprintf(stderr, "Mather: Parser Error: Failed to push expr unto arglist\n");
+			}
 		 }
-		 | call_args COMMA_TOK expr { arglist_push($1, $3); $$ = $1; }
+		 | call_args COMMA_TOK expr { 
+			if (!arglist_push($1, $3))
+			{
+				fprintf(stderr, "Mather: Parser Error: Failed to push new expr onto arglist\n");
+			}
+			$$ = $1;
+		 }
 		 ;
 
 %%

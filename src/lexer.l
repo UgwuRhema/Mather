@@ -16,6 +16,10 @@
 	return PRINT_TOK;
 }
 
+"println" {
+	return PRINTLN_TOK;
+}
+
 "collect" {
 	return INPUT_TOK;
 }

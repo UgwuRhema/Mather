@@ -56,22 +56,23 @@ extern int yydebug;
     YYUNDEF = 257,                 /* "invalid token"  */
     START_TOK = 258,               /* "'Start label'"  */
     PRINT_TOK = 259,               /* "'Print'"  */
-    INPUT_TOK = 260,               /* "'Collect'"  */
-    NUM_TOK = 261,                 /* "'Number'"  */
-    IDENT_TOK = 262,               /* "'Identifier'"  */
-    ASSIGN_TOK = 263,              /* "'='"  */
-    ADD_TOK = 264,                 /* "'+'"  */
-    MINUS_TOK = 265,               /* "'-'"  */
-    DIV_TOK = 266,                 /* "'/'"  */
-    MUL_TOK = 267,                 /* "'*'"  */
-    SEMICOLON_TOK = 268,           /* "';'"  */
-    COLON_TOK = 269,               /* "':'"  */
-    LEFTPAREN_TOK = 270,           /* "'('"  */
-    RIGHTPAREN_TOK = 271,          /* "')'"  */
-    GTHAN_TOK = 272,               /* "'>'"  */
-    LTHAN_TOK = 273,               /* "'<'"  */
-    STRING_TOK = 274,              /* "'String'"  */
-    COMMA_TOK = 275                /* "','"  */
+    PRINTLN_TOK = 260,             /* "'Println'"  */
+    INPUT_TOK = 261,               /* "'Collect'"  */
+    NUM_TOK = 262,                 /* "'Number'"  */
+    IDENT_TOK = 263,               /* "'Identifier'"  */
+    ASSIGN_TOK = 264,              /* "'='"  */
+    ADD_TOK = 265,                 /* "'+'"  */
+    MINUS_TOK = 266,               /* "'-'"  */
+    DIV_TOK = 267,                 /* "'/'"  */
+    MUL_TOK = 268,                 /* "'*'"  */
+    SEMICOLON_TOK = 269,           /* "';'"  */
+    COLON_TOK = 270,               /* "':'"  */
+    LEFTPAREN_TOK = 271,           /* "'('"  */
+    RIGHTPAREN_TOK = 272,          /* "')'"  */
+    GTHAN_TOK = 273,               /* "'>'"  */
+    LTHAN_TOK = 274,               /* "'<'"  */
+    STRING_TOK = 275,              /* "'String'"  */
+    COMMA_TOK = 276                /* "','"  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -89,7 +90,7 @@ union YYSTYPE
 	struct tree *tree;
 	struct arglist *arglist;
 
-#line 93 "./src/parser.h"
+#line 94 "./src/parser.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

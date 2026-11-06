@@ -23,6 +23,7 @@ struct tree *root = NULL;
 
 %token START_TOK "'Start label'"
 %token PRINT_TOK "'Print'"
+%token PRINTLN_TOK "'Println'"
 %token INPUT_TOK "'Collect'"
 %token <num> NUM_TOK "'Number'"
 %token <str> IDENT_TOK "'Identifier'"

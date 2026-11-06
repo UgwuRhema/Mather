@@ -1,3 +1,5 @@
 start:
-	print 5.5 + 5.5;
+	print "Enter a value for y: ";
 	y = collect;
+	print "Now let's evaluate y + 100: ";
+	print y + 100;

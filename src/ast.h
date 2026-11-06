@@ -9,6 +9,7 @@ enum EXPR_TYPE
 	EXPR_NUM,
 	EXPR_IDENT,
 	EXPR_BINARY,
+	EXPR_INPUT,
 	EXPR_CALL,
 };
 
@@ -85,6 +86,7 @@ bool arglist_push(struct arglist *, struct expr *);//
 struct expr *expr_num(double);//
 struct expr *expr_ident(char *);//
 struct expr *expr_binary(enum OP_TYPE, struct expr *, struct expr *);//
+struct expr *expr_input(void);
 struct expr *expr_call(char *, struct arglist *);
 
 struct stmt *stmt_print(struct expr *);//

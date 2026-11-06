@@ -89,6 +89,14 @@ expr_binary(enum OP_TYPE t, struct expr *left, struct expr *right)
 }
 
 struct expr *
+expr_input(void)
+{
+	struct expr *ne = (struct expr *)malloc(sizeof(struct expr));
+	ne->type = EXPR_INPUT;
+	return ne;
+}
+
+struct expr *
 expr_call(char *name, struct arglist *args)
 {
 	if (!name || !args)
@@ -119,6 +127,9 @@ expr_free(struct expr *e)
 		case EXPR_BINARY:
 			expr_free(e->as.binary.left);
 			expr_free(e->as.binary.right);
+			free((void *)e);
+			break;
+		case EXPR_INPUT:
 			free((void *)e);
 			break;
 		case EXPR_CALL:

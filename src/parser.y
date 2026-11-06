@@ -95,14 +95,9 @@ term: factor { $$ = $1; }
 factor: NUM_TOK { $$ = expr_num($1); }
 	  | IDENT_TOK { $$ = expr_ident($1); }
 	  | LEFTPAREN_TOK expr RIGHTPAREN_TOK { $$ = $2; }
-	  | input_expr { $$ = expr_input(); }
+	  | INPUT_TOK SEMICOLON_TOK { $$ = expr_input(); } /*fake function call*/
 	  | IDENT_TOK LEFTPAREN_TOK call_args RIGHTPAREN_TOK { $$ = expr_call($1, $3); }
 	  ;
-
-/*fake function call*/
-input_expr: INPUT_TOK SEMICOLON_TOK {
-			}
-			;
 
 call_args: expr {
 			$$ = arglist_create();

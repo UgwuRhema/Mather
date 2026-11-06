@@ -1,5 +1,6 @@
 #include "exe.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 bool
 eval_expr(struct expr *expr, struct symbol_table *symbols, double *out)
@@ -47,7 +48,22 @@ eval_expr(struct expr *expr, struct symbol_table *symbols, double *out)
 		default:
 			return false;
 		case EXPR_INPUT:
-
+		{
+			char buffer[256];
+			char *end;
+			if (!fgets(buffer, sizeof(buffer), stdin))
+			{
+				fprintf(stderr, "Mather: Error: Failed to read input\n");
+				return false;
+			}
+			*out = strtod(buffer, &end);
+			if (end ==  buffer)
+			{
+				fprintf(stderr, "Mather: Error: Invalid numeric input\n");
+				return false;
+			}
+			return true;
+		}
 	}
 	return false;
 }

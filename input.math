@@ -1,5 +1,4 @@
 start:
-	print "Enter a value for y: ";
-	y = collect;
-	print "Now let's evaluate y + 100: ";
-	print y + 100;
+	print "Yes";
+	println "No";
+	println "Bum";

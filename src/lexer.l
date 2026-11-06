@@ -16,6 +16,10 @@
 	return PRINT_TOK;
 }
 
+"collect" {
+	return INPUT_TOK;
+}
+
 "-"?[0-9]+(\.[0-9]+)? {
 	yylval.num = atof(yytext);
 	return NUM_TOK;

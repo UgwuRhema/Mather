@@ -23,6 +23,7 @@ struct tree *root = NULL;
 
 %token START_TOK "'Start label'"
 %token PRINT_TOK "'Print'"
+%token INPUT_TOK "'Collect'"
 %token <num> NUM_TOK "'Number'"
 %token <str> IDENT_TOK "'Identifier'"
 %token ASSIGN_TOK "'='"
@@ -94,8 +95,14 @@ term: factor { $$ = $1; }
 factor: NUM_TOK { $$ = expr_num($1); }
 	  | IDENT_TOK { $$ = expr_ident($1); }
 	  | LEFTPAREN_TOK expr RIGHTPAREN_TOK { $$ = $2; }
+	  | input_expr { $$ = expr_input(); }
 	  | IDENT_TOK LEFTPAREN_TOK call_args RIGHTPAREN_TOK { $$ = expr_call($1, $3); }
 	  ;
+
+/*fake function call*/
+input_expr: INPUT_TOK SEMICOLON_TOK {
+			}
+			;
 
 call_args: expr {
 			$$ = arglist_create();

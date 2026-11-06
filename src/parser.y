@@ -95,7 +95,7 @@ term: factor { $$ = $1; }
 factor: NUM_TOK { $$ = expr_num($1); }
 	  | IDENT_TOK { $$ = expr_ident($1); }
 	  | LEFTPAREN_TOK expr RIGHTPAREN_TOK { $$ = $2; }
-	  | INPUT_TOK SEMICOLON_TOK { $$ = expr_input(); } /*fake function call*/
+	  | INPUT_TOK { $$ = expr_input(); } /*fake function call*/
 	  | IDENT_TOK LEFTPAREN_TOK call_args RIGHTPAREN_TOK { $$ = expr_call($1, $3); }
 	  ;
 

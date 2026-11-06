@@ -172,14 +172,23 @@ stmt_print_string(char *str, int new_line)
 	if (!ns) return NULL;
 	ns->type = PRINT_STRING_STMT;
 	size_t len = strlen(str);
-	ns->as.print_str = (char *)malloc(len + 1);
+	ns->as.print_str = NULL;
+	if (new_line == 0)
+		ns->as.print_str = (char *)malloc(len + 1);
+	else if (new_line == 1)
+		ns->as.print_str = (char *)malloc(len + 2);
 	if (!ns->as.print_str)
 	{
 		free((void *)ns);
 		return NULL;
 	}
 	strcpy(ns->as.print_str, str);
-	ns->as.print_str[len] = '\0';/*i think strcpy null terminates but just to be safe*/
+	if (new_line == 0)
+		ns->as.print_str[len] = '\0';/*i think strcpy null terminates but just to be safe*/
+	else if (new_line == 1) {
+		ns->as.print_str[len] = '\n';
+		ns->as.print_str[len + 1] = '\0';
+	}
 	ns->next = NULL;
 	return ns;
 }

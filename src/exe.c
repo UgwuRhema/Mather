@@ -85,7 +85,7 @@ execute_stmt(struct stmt *stmt, struct symbol_table *symbols)
 			return true;
 		case PRINT_STRING_STMT:
 			if (stmt->as.print_str != NULL) {
-				printf("%s\n", stmt->as.print_str);
+				printf("%s", stmt->as.print_str);
 				return true;
 			}
 			return false;

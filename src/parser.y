@@ -73,7 +73,10 @@ print_stmt: PRINT_TOK expr SEMICOLON_TOK {
 				$$ = stmt_print($2);	
 			}
 			| PRINT_TOK STRING_TOK SEMICOLON_TOK {
-				$$ = stmt_print_string($2);
+				$$ = stmt_print_string($2, 0);
+			}
+			| PRINTLN_TOK STRING_TOK SEMICOLON_TOK {
+				$$ = stmt_print_string($2, 1);
 			}
 			;
 

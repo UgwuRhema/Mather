@@ -90,7 +90,7 @@ struct expr *expr_input(void);
 struct expr *expr_call(char *, struct arglist *);
 
 struct stmt *stmt_print(struct expr *);//
-struct stmt *stmt_print_string(char *);
+struct stmt *stmt_print_string(char *, int);
 struct stmt *stmt_assign(char *, struct expr *);//
 struct stmt *stmt_expr(struct expr *);//
 

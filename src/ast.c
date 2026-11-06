@@ -164,7 +164,7 @@ stmt_print(struct expr *print)
 /*it is not like a print statement at all, and in Mather*/
 /*strings cannot be assigned to variables, only printed*/
 struct stmt *
-stmt_print_string(char *str)
+stmt_print_string(char *str, int new_line)
 {
 	if (!str)
 		return NULL;

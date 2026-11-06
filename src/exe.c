@@ -46,6 +46,8 @@ eval_expr(struct expr *expr, struct symbol_table *symbols, double *out)
 			return true;
 		default:
 			return false;
+		case EXPR_INPUT:
+
 	}
 	return false;
 }

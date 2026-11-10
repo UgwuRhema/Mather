@@ -85,10 +85,7 @@ eval_expr(struct expr *expr, struct symbol_table *symbols, double *out)
 				return true;
             } else if (strcmp(expr->as.call.name, "pow") == 0) {
 				if (expr->as.call.argc != 2)
-				{
-					fprintf(stderr, "Mather: Error: pow() function needs 2 arguments\n");
 					return false;
-				}
 				/*numbers for the base and number*/
 				double base = 0.0;
 				double power = 0.0;
@@ -104,6 +101,15 @@ eval_expr(struct expr *expr, struct symbol_table *symbols, double *out)
 				}
 				/*debug*/
 				*out = pow(base, power);
+				return true;
+			} else if (strcmp(expr->as.call.name, "round") == 0) {
+				if (expr->as.call.argc != 1)
+					return false;
+				double number = 0.0;
+				bool res = eval_expr(expr->as.call.args->items[0], symbols, &number);
+				if (!res)
+					return false;
+				*out = round(number);
 				return true;
 			}
 			return false;

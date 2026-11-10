@@ -84,7 +84,13 @@ eval_expr(struct expr *expr, struct symbol_table *symbols, double *out)
 				*out = sqrt(number);
 				return true;
             } else if (strcmp(expr->as.call.name, "pow") == 0) {
+				if (expr->as.call.argc != 2)
+				{
+					fprintf(stderr, "Mather: Error: pow() function needs 2 arguments\n");
+					return false;
+				}
 				/*stuff*/
+				return false;
 			}
 			return false;
         }

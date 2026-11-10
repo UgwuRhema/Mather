@@ -89,8 +89,20 @@ eval_expr(struct expr *expr, struct symbol_table *symbols, double *out)
 					fprintf(stderr, "Mather: Error: pow() function needs 2 arguments\n");
 					return false;
 				}
-				/*stuff*/
-				return false;
+				/*numbers for the base and number*/
+				double base;
+				double power;
+				if (!eval_expr(*expr->as.call.args->items, symbols, &base) && !eval_expr(*(expr->as.call.args->items + 1), symbols, &power))
+				{
+					fprintf(stderr, "Mather: Error: Couldn't parse expressions in pow function\n");
+					return false;
+				}
+				for (double i = 1; i < power; ++i)
+				{
+					base *= base;
+				}
+				*out = base;
+				return true;
 			}
 			return false;
         }

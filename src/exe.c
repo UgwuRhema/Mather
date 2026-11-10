@@ -1,6 +1,8 @@
 #include "exe.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <math.h>
 
 bool
 eval_expr(struct expr *expr, struct symbol_table *symbols, double *out)
@@ -64,6 +66,28 @@ eval_expr(struct expr *expr, struct symbol_table *symbols, double *out)
 			}
 			return true;
 		}
+        case EXPR_CALL:
+        {
+            if (strcmp(expr->as.call.name, "sqrt") == 0)
+            {
+                if (expr->as.call.argc != 1)
+                {
+                    fprintf(stderr, "Mather: Error: sqrt() function needs 1 argument\n");
+					return false;
+				}
+				double number;
+				if (!eval_expr(*expr->as.call.args->items, symbols, &number))
+				{
+					fprintf(stderr, "Mather: Error: Failed to evaluate expression in sqrt() function\n");
+					return false;
+				}
+				*out = sqrt(number);
+				return true;
+            } else if (strcmp(expr->as.call.name, "pow") == 0) {
+				/*stuff*/
+			}
+			return false;
+        }
 	}
 	return false;
 }

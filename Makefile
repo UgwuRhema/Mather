@@ -19,7 +19,7 @@ EXE := ./src/exe.c
 all: $(INT)
 	$(MAKE) -C . lex
 	$(MAKE) -C . parse
-	$(CC) $(CFLAGS) -o $(INT_OUT) $(INT) $(PAR_OUT) $(LEX_OUT) $(AST) $(SYM) $(EXE) -lfl
+	$(CC) $(CFLAGS) -o $(INT_OUT) $(INT) $(PAR_OUT) $(LEX_OUT) $(AST) $(SYM) $(EXE) -lfl -lm
 
 lex:
 	$(F) -o $(LEX_OUT) $(LEX)

@@ -1,4 +1,3 @@
 start:
-	print "Yes";
-	println "No";
-	println "Bum";
+	x = sqrt(25);
+	print x;

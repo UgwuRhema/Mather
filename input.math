@@ -5,3 +5,4 @@ start:
 	print "Enter a Value for y: ";
 	y = collect;
 	print "The value of x^y is: "; print pow(x, y);
+	print "And it rounded is: "; print round(pow(x, y));

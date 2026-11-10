@@ -111,6 +111,17 @@ eval_expr(struct expr *expr, struct symbol_table *symbols, double *out)
 					return false;
 				*out = round(number);
 				return true;
+			} else if (strcmp(expr->as.call.name, "ceil") == 0) {
+				if (expr->as.call.argc != 1)
+					return false;
+				double number = 0.0;
+				bool res = eval_expr(expr->as.call.args->items[0], symbols, &number);
+				if (!res)
+					return false;
+				*out = ceil(number);
+				return true;
+			} else if (strcmp(expr->as.call.name, "") == 0) {
+				/*another function*/
 			}
 			return false;
         }

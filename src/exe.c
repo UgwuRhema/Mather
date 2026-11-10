@@ -90,9 +90,14 @@ eval_expr(struct expr *expr, struct symbol_table *symbols, double *out)
 					return false;
 				}
 				/*numbers for the base and number*/
-				double base;
-				double power;
-				if (!eval_expr(*expr->as.call.args->items, symbols, &base) && !eval_expr(*(expr->as.call.args->items + 2), symbols, &power))
+				double base = 0.0;
+				double power = 0.0;
+				if (!eval_expr(expr->as.call.args->items[0], symbols, &base))
+				{
+					fprintf(stderr, "Mather: Error: Couldn't parse expressions in pow function\n");
+					return false;
+				}
+				if (!eval_expr(expr->as.call.args->items[1], symbols, &power))
 				{
 					fprintf(stderr, "Mather: Error: Couldn't parse expressions in pow function\n");
 					return false;

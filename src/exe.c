@@ -90,6 +90,7 @@ eval_expr(struct expr *expr, struct symbol_table *symbols, double *out)
 					return false;
 				}
 				/*stuff*/
+				*out = 2.2; /*fake value*/
 				return false;
 			}
 			return false;

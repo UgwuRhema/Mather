@@ -1,3 +1,4 @@
 start:
-	x = sqrt();
+	x = sqrt(49);
+	y = pow(5);
 	print x;

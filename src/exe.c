@@ -102,7 +102,6 @@ eval_expr(struct expr *expr, struct symbol_table *symbols, double *out)
 					fprintf(stderr, "Mather: Error: Couldn't parse expressions in pow function\n");
 					return false;
 				}
-				printf("DEBUG: %g & %g\n", base, power);
 				/*debug*/
 				*out = pow(base, power);
 				return true;

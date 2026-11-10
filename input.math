@@ -1,3 +1,7 @@
 start:
-	y = pow(5, 2);
-	print y;
+	println "Hello World, welcome to Mather programming";
+	print "Enter a Value for x: ";
+	x = collect;
+	print "Enter a Value for y: ";
+	y = collect;
+	print "The value of x^y is: "; print pow(x, y);

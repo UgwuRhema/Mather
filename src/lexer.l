@@ -24,6 +24,14 @@
 	return INPUT_TOK;
 }
 
+"if" {
+	return IF_TOK;
+}
+
+"else" {
+	return ELSE_TOK;
+}
+
 "-"?[0-9]+(\.[0-9]+)? {
 	yylval.num = atof(yytext);
 	return NUM_TOK;

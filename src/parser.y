@@ -40,6 +40,8 @@ struct tree *root = NULL;
 %token LTHAN_TOK "'<'"
 %token <str>STRING_TOK "'String'"
 %token COMMA_TOK "','"
+%token IF_TOK "'if'"
+%token ELSE_TOK "'else'"
 
 %type <expr> expr term factor
 %type <arglist> call_args

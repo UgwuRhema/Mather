@@ -120,8 +120,6 @@ eval_expr(struct expr *expr, struct symbol_table *symbols, double *out)
 					return false;
 				*out = ceil(number);
 				return true;
-			} else if (strcmp(expr->as.call.name, "") == 0) {
-				/*another function*/
 			}
 			return false;
         }

@@ -45,7 +45,7 @@ struct tree *root = NULL;
 
 %type <expr> expr term factor
 %type <arglist> call_args
-%type <stat> statement print_stmt assign_stmt
+%type <stat> statement print_stmt assign_stmt conditional_stmt
 %type <tree> program statements
 
 %%
@@ -67,6 +67,7 @@ statements: %empty  {
 
 statement: print_stmt { $$ = $1; }
 		 | assign_stmt { $$ = $1; }
+		 | conditional_stmt {$$ = $1; }
 		 | expr SEMICOLON_TOK { $$ = stmt_expr($1); }
 		 ;
 
@@ -87,6 +88,12 @@ assign_stmt: IDENT_TOK ASSIGN_TOK expr SEMICOLON_TOK {
 				$$ = stmt_assign($1, $3);
 			}
 			;
+
+conditional_stmt: IF_TOK LEFTPAREN_TOK RIGHTPAREN_TOK COLON_TOK statements SEMICOLON_TOK
+				{
+					/*if statement?*/
+				}
+				;
 
 expr: term { $$ = $1; }
 	| expr ADD_TOK term { $$ = expr_binary(OP_ADD, $1, $3); }

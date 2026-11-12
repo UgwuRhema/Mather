@@ -76,7 +76,7 @@ struct stmt
 		struct
 		{
 			struct expr *condition;
-			struct stmt *head;
+			struct tree *head;
 		} condition;
 		struct expr *expr;
 	} as;
@@ -102,7 +102,7 @@ struct stmt *stmt_print(struct expr *);//
 struct stmt *stmt_print_string(char *, int);
 struct stmt *stmt_assign(char *, struct expr *);//
 struct stmt *stmt_expr(struct expr *);//
-struct stmt *stmt_condition(struct expr *, struct stmt *;
+struct stmt *stmt_condition(struct expr *, struct tree *);
 
 struct tree *tree_new(void);//
 void tree_add_stmt(struct tree *, struct stmt *);//

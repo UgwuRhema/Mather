@@ -91,7 +91,7 @@ assign_stmt: IDENT_TOK ASSIGN_TOK expr SEMICOLON_TOK {
 
 conditional_stmt: IF_TOK LEFTPAREN_TOK expr RIGHTPAREN_TOK COLON_TOK statements SEMICOLON_TOK
 				{
-					/*if statement?*/
+					$$ = stmt_condition($3, $6);
 				}
 				;
 

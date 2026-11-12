@@ -237,7 +237,7 @@ stmt_expr(struct expr *e)
 }
 
 struct stmt *
-stmt_condition(struct expr *condition, struct stmt *head)
+stmt_condition(struct expr *condition, struct tree *head)
 {
 	if (!condition)
 		return NULL;

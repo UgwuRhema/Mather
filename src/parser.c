@@ -1484,7 +1484,7 @@ yyreduce:
   case 13: /* conditional_stmt: "'if'" "'('" expr "')'" "':'" statements "';'"  */
 #line 93 "./src/parser.y"
                                 {
-					/*if statement?*/
+					(yyval.stat) = stmt_condition((yyvsp[-4].expr), (yyvsp[-1].tree));
 				}
 #line 1490 "./src/parser.c"
     break;

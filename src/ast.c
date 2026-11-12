@@ -271,6 +271,11 @@ stmt_free(struct stmt *stat)
 			expr_free(stat->as.expr);
 			free((void *)stat);
 			break;
+		case CONDITION_STMT:
+			expr_free(stat->as.condition.condition);
+			tree_free(stat->as.condition.head);
+			free((void *)stat);
+			break;
 		default:
 			fprintf(stderr, "Abort due unknown Statement node type\n");
 			abort();

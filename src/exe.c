@@ -43,6 +43,24 @@ eval_expr(struct expr *expr, struct symbol_table *symbols, double *out)
 					}
 					*out = left / right;
 					break;
+				case OP_GTHAN:
+					if (left > right)
+						*out = 1.0;/*true*/
+					else
+						*out = 0.0;/*false*/
+					break;
+				case OP_LTHAN:
+					if (left < right)
+						*out = 1.0;
+					else
+						*out = 0.0;
+					break;
+				case OP_EXEQ:
+					if (left == right)
+						*out = 1.0;
+					else
+						*out = 0.0;
+					break;
 				default:
 					return false;
 			}

@@ -1,4 +1,6 @@
 start:
+	x = 1;
 	if (x < 2):
+		println "It is less than";
 		print x;
 	;

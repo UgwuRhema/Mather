@@ -272,6 +272,7 @@ stmt_free(struct stmt *stat)
 			free((void *)stat);
 			break;
 		case CONDITION_STMT:
+			/*free the tree and condition expression*/
 			expr_free(stat->as.condition.condition);
 			tree_free(stat->as.condition.head);
 			free((void *)stat);

@@ -189,6 +189,28 @@ execute_stmt(struct stmt *stmt, struct symbol_table *symbols)
 			}
 			/*we don't use value*/
 			return true;
+		case CONDITION_STMT:
+			double out4;/*this would hold the condition expression
+			which is either 1 or 0*/
+			if (!eval_expr(stmt->as.condition.condition, symbols, &out4))
+			{
+				fprintf(stderr, "Mather: Error: Failed to evaluate expression in conditional statement\n");
+				return false;
+			}
+			if (out == 1.0)/*if the condition is true, we execute it*/
+			{
+				if (!execute_tree(stmt->as.condition.head))
+				{
+					fprintf(stderr, "Mather: Error: Failed to execute statements in conditional statement\n");
+					return false;
+				}
+			} else if (out == 0.0) { /*else we don't*/
+				return true;
+			} else {
+				fprintf(stderr, "Mather: fatal error: Unknown expression result for conditional statement\n");
+				abort();
+			}
+			return true;
 		default:
 			return false;
 	}

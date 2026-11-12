@@ -89,13 +89,15 @@ assign_stmt: IDENT_TOK ASSIGN_TOK expr SEMICOLON_TOK {
 			}
 			;
 
-conditional_stmt: IF_TOK LEFTPAREN_TOK RIGHTPAREN_TOK COLON_TOK statements SEMICOLON_TOK
+conditional_stmt: IF_TOK LEFTPAREN_TOK expr RIGHTPAREN_TOK COLON_TOK statements SEMICOLON_TOK
 				{
 					/*if statement?*/
 				}
 				;
 
 expr: term { $$ = $1; }
+	| expr LTHAN_TOK expr
+	| expr GTHAN_TOK expr
 	| expr ADD_TOK term { $$ = expr_binary(OP_ADD, $1, $3); }
 	| expr MINUS_TOK term { $$ = expr_binary(OP_SUB, $1, $3);}
 ;

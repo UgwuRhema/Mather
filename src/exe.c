@@ -199,20 +199,21 @@ execute_stmt(struct stmt *stmt, struct symbol_table *symbols)
 			}
 			/*DEBUG*/
 			printf("Value: %g\n", out4);
-			if (out == 1.0)/*if the condition is true, we execute it*/
+			if (out4 == 1)/*if the condition is true, we execute it*/
 			{
 				if (!execute_tree(stmt->as.condition.head))
 				{
 					fprintf(stderr, "Mather: Error: Failed to execute statements in conditional statement\n");
 					return false;
 				}
-			} else if (out == 0.0) { /*else we don't*/
+				return true;
+			} else if (out4 == 0) { /*else we don't*/
 				return true;
 			} else {
-				fprintf(stderr, "Mather: fatal error: Unknown expression result for conditional statement\n");
+				fprintf(stderr, "Mather: Fatal Error: Unknown Error in conditional statement\n");
 				abort();
 			}
-			return true;
+			return false;
 		default:
 			return false;
 	}

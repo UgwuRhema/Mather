@@ -96,8 +96,9 @@ conditional_stmt: IF_TOK LEFTPAREN_TOK expr RIGHTPAREN_TOK COLON_TOK statements 
 				;
 
 expr: term { $$ = $1; }
-	| expr LTHAN_TOK expr
-	| expr GTHAN_TOK expr
+	| expr LTHAN_TOK expr { $$ = expr_binary(OP_LTHAN, $1, $3); }
+	| expr GTHAN_TOK expr { $$ = expr_binary(OP_GTHAN, $1, $3);}
+	| expr ASSIGN_TOK ASSIGN_TOK expr { $$ = expr_binary(OP_EXEQ, $1, $4); }
 	| expr ADD_TOK term { $$ = expr_binary(OP_ADD, $1, $3); }
 	| expr MINUS_TOK term { $$ = expr_binary(OP_SUB, $1, $3);}
 ;

@@ -27,6 +27,9 @@ enum OP_TYPE
 	OP_SUB,
 	OP_MUL,
 	OP_DIV,
+	OP_GTHAN,
+	OP_LTHAN,
+	OP_EXEQ,
 };
 
 struct expr

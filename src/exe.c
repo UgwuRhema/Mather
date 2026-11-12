@@ -197,9 +197,7 @@ execute_stmt(struct stmt *stmt, struct symbol_table *symbols)
 				fprintf(stderr, "Mather: Error: Failed to evaluate expression in conditional statement\n");
 				return false;
 			}
-			/*DEBUG*/
-			printf("Value: %g\n", out4);
-			if (out4 == 1)/*if the condition is true, we execute it*/
+			if (out4)/*if the condition is true, we execute it*/
 			{
 				if (!execute_tree(stmt->as.condition.head))
 				{
@@ -207,7 +205,7 @@ execute_stmt(struct stmt *stmt, struct symbol_table *symbols)
 					return false;
 				}
 				return true;
-			} else if (out4 == 0) { /*else we don't*/
+			} else if (!out4) { /*else we don't*/
 				return true;
 			} else {
 				fprintf(stderr, "Mather: Fatal Error: Unknown Error in conditional statement\n");

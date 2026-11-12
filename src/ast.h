@@ -19,6 +19,7 @@ enum STMT_TYPE
 	PRINT_STRING_STMT,
 	ASSIGN_STMT,
 	EXPR_STMT,
+	CONDITION_STMT,
 };
 
 enum OP_TYPE
@@ -72,6 +73,11 @@ struct stmt
 			char *name;
 			struct expr *value;
 		} assign;
+		struct
+		{
+			struct expr *condition;
+			struct stmt *head;
+		} condition;
 		struct expr *expr;
 	} as;
 	struct stmt *next;
@@ -96,6 +102,7 @@ struct stmt *stmt_print(struct expr *);//
 struct stmt *stmt_print_string(char *, int);
 struct stmt *stmt_assign(char *, struct expr *);//
 struct stmt *stmt_expr(struct expr *);//
+struct stmt *stmt_condition(struct expr *, struct stmt *;
 
 struct tree *tree_new(void);//
 void tree_add_stmt(struct tree *, struct stmt *);//

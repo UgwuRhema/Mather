@@ -236,6 +236,18 @@ stmt_expr(struct expr *e)
 	return ns;
 }
 
+struct stmt *
+stmt_condition(struct expr *condition, struct stmt *head)
+{
+	if (!condition)
+		return NULL;
+	struct stmt *ns = (struct stmt *)malloc(sizeof(struct stmt));
+	ns->type = CONDITION_STMT;
+	ns->as.condition.condition = condition;
+	ns->as.condition.head = head;
+	return ns;
+}
+
 void
 stmt_free(struct stmt *stat)
 {

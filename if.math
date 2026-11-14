@@ -3,5 +3,6 @@ start:
 	\\what weird "if" statements
 	\\funny looking, hahahaha
 	if (x < 2):
-		println "It is less than";
+		print x;
+		println "is less than";
 	;

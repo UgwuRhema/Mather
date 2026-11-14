@@ -38,7 +38,8 @@ main(int argc, char *argv[])
 	/*we parse and get the return value, which is just zero*/
 	int result = yyparse();
 	/*we execute here*/
-	if(!execute_tree(root))
+	struct symbol_table *global_symbol = symbol_table_new();
+	if(!execute_tree(root, global_symbol))
 	{
 		fprintf(stderr, "Mather: Error: Failed to execute statements in tree\n");
 		tree_free(root);

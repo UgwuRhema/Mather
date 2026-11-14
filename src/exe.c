@@ -199,7 +199,7 @@ execute_stmt(struct stmt *stmt, struct symbol_table *symbols)
 			}
 			if (out4)/*if the condition is true, we execute it*/
 			{
-				if (!execute_tree(stmt->as.condition.head))
+				if (!execute_tree(stmt->as.condition.head, symbols))
 				{
 					fprintf(stderr, "Mather: Error: Failed to execute statements in conditional statement\n");
 					return false;
@@ -219,12 +219,9 @@ execute_stmt(struct stmt *stmt, struct symbol_table *symbols)
 }
 
 bool
-execute_tree(struct tree *tree)
+execute_tree(struct tree *tree, struct symbol_table *sym)
 {
-	if (!tree) return false;
-	struct symbol_table *sym = symbol_table_new();
-	if (!sym)
-		return false;
+	if (!tree || !sym) return false;
 	tree->statements = reverse_stmt_list(tree);/*reverse the statement list*/
 	struct stmt *curr_stmt = tree->statements;
 	while (curr_stmt)

@@ -7,6 +7,6 @@
 
 bool eval_expr(struct expr *expr, struct symbol_table *symbols, double *out);
 bool execute_stmt(struct stmt *stmt, struct symbol_table *symbols);
-bool execute_tree(struct tree *tree);
+bool execute_tree(struct tree *tree, struct symbol_table *);
 
 #endif

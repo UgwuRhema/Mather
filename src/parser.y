@@ -11,6 +11,7 @@ struct tree *root = NULL;
 %}
 
 %define parse.error verbose
+%expect 0
 
 %union {
 	char *str;
@@ -42,8 +43,9 @@ struct tree *root = NULL;
 %token COMMA_TOK "','"
 %token IF_TOK "'if'"
 %token ELSE_TOK "'else'"
+%token EQ_TOK "'=='"
 
-%type <expr> expr term factor
+%type <expr> expr rel add term factor
 %type <arglist> call_args
 %type <stat> statement print_stmt assign_stmt conditional_stmt
 %type <tree> program statements
@@ -95,13 +97,19 @@ conditional_stmt: IF_TOK LEFTPAREN_TOK expr RIGHTPAREN_TOK COLON_TOK statements 
 				}
 				;
 
-expr: term { $$ = $1; }
-	| expr LTHAN_TOK expr { $$ = expr_binary(OP_LTHAN, $1, $3); }
-	| expr GTHAN_TOK expr { $$ = expr_binary(OP_GTHAN, $1, $3);}
-	| expr ASSIGN_TOK ASSIGN_TOK expr { $$ = expr_binary(OP_EXEQ, $1, $4); }
-	| expr ADD_TOK term { $$ = expr_binary(OP_ADD, $1, $3); }
-	| expr MINUS_TOK term { $$ = expr_binary(OP_SUB, $1, $3);}
-;
+expr: rel { $$ = $1; }
+	;
+
+rel: add { $$ = $1; }
+	| rel LTHAN_TOK add { $$ = expr_binary(OP_LTHAN, $1, $3); }
+	| rel GTHAN_TOK add { $$ = expr_binary(OP_GTHAN, $1, $3);}
+	| rel EQ_TOK add { $$ = expr_binary(OP_EXEQ, $1, $3); }
+	;
+
+add: term { $$ = $1; }
+	| add ADD_TOK term { $$ = expr_binary(OP_ADD, $1, $3); }
+	| add MINUS_TOK term { $$ = expr_binary(OP_SUB, $1, $3);}
+	;
 
 term: factor { $$ = $1; }
 	| term MUL_TOK factor { $$ = expr_binary(OP_MUL, $1, $3); }

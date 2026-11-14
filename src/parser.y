@@ -97,6 +97,7 @@ conditional_stmt: IF_TOK LEFTPAREN_TOK expr RIGHTPAREN_TOK COLON_TOK statements 
 				}
 				;
 
+/*expressions*/
 expr: rel { $$ = $1; }
 	;
 

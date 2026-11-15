@@ -197,6 +197,8 @@ execute_stmt(struct stmt *stmt, struct symbol_table *symbols)
 				fprintf(stderr, "Mather: Error: Failed to evaluate expression in conditional statement\n");
 				return false;
 			}
+			/*we reverse once here...*/
+			stmt->as.condition.head->statements = reverse_stmt_list(stmt->as.condition.head);
 			if (out4)/*if the condition is true, we execute it*/
 			{
 				if (!execute_tree(stmt->as.condition.head, symbols))

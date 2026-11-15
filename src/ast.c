@@ -242,9 +242,12 @@ stmt_condition(struct expr *condition, struct tree *head)
 	if (!condition)
 		return NULL;
 	struct stmt *ns = (struct stmt *)malloc(sizeof(struct stmt));
+	if (!ns)
+		return NULL;/*add malloc failure condition*/
 	ns->type = CONDITION_STMT;
 	ns->as.condition.condition = condition;
 	ns->as.condition.head = head;
+	ns->next = NULL;/*i forgot this*/
 	return ns;
 }
 

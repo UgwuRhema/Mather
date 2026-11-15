@@ -38,6 +38,8 @@ main(int argc, char *argv[])
 	/*we parse and get the return value, which is just zero*/
 	int result = yyparse();
 	/*we execute here*/
+	/*on when the final tree is comstructted, we reverse once and that's all*/
+	root->statements = reverse_stmt_list(root);
 	struct symbol_table *global_symbol = symbol_table_new();
 	if(!execute_tree(root, global_symbol))
 	{

@@ -222,7 +222,7 @@ bool
 execute_tree(struct tree *tree, struct symbol_table *sym)
 {
 	if (!tree || !sym) return false;
-	tree->statements = reverse_stmt_list(tree);/*reverse the statement list*/
+	/*changing reversal time*/
 	struct stmt *curr_stmt = tree->statements;
 	while (curr_stmt)
 	{

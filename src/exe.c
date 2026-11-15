@@ -235,6 +235,6 @@ execute_tree(struct tree *tree, struct symbol_table *sym)
 		}
 		curr_stmt = curr_stmt->next;
 	}
-	symbol_table_free(sym);
+	//symbol_table_free(sym);
 	return true;
 }

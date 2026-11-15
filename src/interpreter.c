@@ -44,11 +44,13 @@ main(int argc, char *argv[])
 	if(!execute_tree(root, global_symbol))
 	{
 		fprintf(stderr, "Mather: Error: Failed to execute statements in tree\n");
+		symbol_table_free(global_symbol);
 		tree_free(root);
 		root = NULL;
 		fclose(fd);
 		exit(1);
 	}
+	symbol_table_free(global_symbol);
 	/*let's clean here*/
 	if (root)
 	{

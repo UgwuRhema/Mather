@@ -20,6 +20,10 @@ main(int argc, char *argv[])
 		fprintf(stderr, "Mather: Error, no input files found\n");
 		return 1;
 	}
+	if (strcmp(argv[1], "--help") == 0)
+	{
+		
+	}
 	char *filename = argv[1];
 	FILE *fd = fopen(filename, "r");	
 	if (!fd)

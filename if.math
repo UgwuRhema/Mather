@@ -1,11 +1,9 @@
 start:
-	x = 1;
-	\\what weird "if" statements
-	\\funny looking, hahahaha
-	if (x < 2):
+	x = 72;
+	if(x < 2):
 		print x; \\x is finally found
 		println "is less than";
+	; else:
+		print x;
+		println "is not less than";
 	;
-	x = 50 + x;
-	print x;
-	println "Bomboclat";

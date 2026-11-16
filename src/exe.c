@@ -210,6 +210,11 @@ execute_stmt(struct stmt *stmt, struct symbol_table *symbols)
 			} else if (!out4) { /*else we don't*/
 				if (stmt->as.condition.else_block)
 				{
+					if (!stmt->as.condition.if_block)
+					{
+						fprintf(stderr, "Mather: Error: Cannot define an else block without a following if block\n");
+						return false;
+					}
 					stmt->as.condition.else_block->statements = reverse_stmt_list(stmt->as.condition.else_block);
 					if (!execute_tree(stmt->as.condition.else_block, symbols))
 					{

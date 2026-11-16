@@ -25,7 +25,7 @@ main(int argc, char *argv[])
 		printf("Mather Interpreter\n\n");
 		printf("Usage: mather [options] <mather source file> \n");
 		printf("\tOptions:\n\t--help:\tDisplay this information\n");
-		printf("To run against a Mather file:\tmather \"file.math\"\n");
+		printf("To run against a Mather file:\t\"mather file.math\"\n");
 		return 0;
 	}
 	/*get filename for CLA*/

@@ -237,7 +237,7 @@ stmt_expr(struct expr *e)
 }
 
 struct stmt *
-stmt_condition(struct expr *condition, struct tree *head)
+stmt_condition(struct expr *condition, struct tree *if_block, struct tree *else_block)
 {
 	if (!condition)
 		return NULL;
@@ -246,7 +246,8 @@ stmt_condition(struct expr *condition, struct tree *head)
 		return NULL;/*add malloc failure condition*/
 	ns->type = CONDITION_STMT;
 	ns->as.condition.condition = condition;
-	ns->as.condition.head = head;
+	ns->as.condition.if_block = if_block;
+	ns->as.condition.else_block = else_block;
 	ns->next = NULL;/*i forgot this*/
 	return ns;
 }

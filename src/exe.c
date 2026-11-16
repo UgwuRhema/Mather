@@ -208,6 +208,16 @@ execute_stmt(struct stmt *stmt, struct symbol_table *symbols)
 				}
 				return true;
 			} else if (!out4) { /*else we don't*/
+				if (stmt->as.condition.else_block)
+				{
+					stmt->as.condition.else_block->statements = reverse_stmt_list(stmt->as.condition.else_block);
+					if (!execute_tree(stmt->as.condition.else_block, symbols))
+					{
+						fprintf(stderr, "Mather: Error: Failed to execute statements in conditional else statement\n");
+						return false;
+					}
+					return true;
+				}
 				return true;
 			} else {
 				fprintf(stderr, "Mather: Fatal Error: Unknown Error in conditional statement\n");

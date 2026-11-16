@@ -1,0 +1,13 @@
+start:
+	x = 5;
+	\\i'll be happy if this works
+	if (x + 1 == 6):
+		println "yes";
+		\\nested works surely?
+		if (pow(x, 2) == 25):
+			\\surely....
+			println "Yes, can square to 25";
+		;
+	; else:
+		println "no";
+	;

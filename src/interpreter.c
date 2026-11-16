@@ -22,7 +22,11 @@ main(int argc, char *argv[])
 	}
 	if (strcmp(argv[1], "--help") == 0)
 	{
-		//stuff...	
+		printf("Mather Interpreter\n\n");
+		printf("Usage: mather [options] <mather source file> \n");
+		printf("\tOptions:\n\t--help:\tDisplay this information\n");
+		printf("To run against a Mather file:\tmather \"file.math\"\n");
+		return 0;
 	}
 	/*get filename for CLA*/
 	char *filename = argv[1];

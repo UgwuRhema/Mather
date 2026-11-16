@@ -278,7 +278,8 @@ stmt_free(struct stmt *stat)
 		case CONDITION_STMT:
 			/*free the tree and condition expression*/
 			expr_free(stat->as.condition.condition);
-			tree_free(stat->as.condition.head);
+			tree_free(stat->as.condition.if_block);
+			tree_free(stat->as.condition.else_block);
 			free((void *)stat);
 			break;
 		default:

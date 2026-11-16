@@ -22,8 +22,9 @@ main(int argc, char *argv[])
 	}
 	if (strcmp(argv[1], "--help") == 0)
 	{
-		
+		//stuff...	
 	}
+	/*get filename for CLA*/
 	char *filename = argv[1];
 	FILE *fd = fopen(filename, "r");	
 	if (!fd)
@@ -31,6 +32,7 @@ main(int argc, char *argv[])
 		fprintf(stderr, "Mather: Error, failed to open %s\n", filename);
 		return 1;
 	}
+	/*match file against extension format*/
 	if (!is_valid_mather_file(filename))
 	{
 		fprintf(stderr, "Mather: Error: failed to load %s, it is not a Mather file'.math'\n"
@@ -41,6 +43,12 @@ main(int argc, char *argv[])
 	yyin = fd;
 	/*we parse and get the return value, which is just zero*/
 	int result = yyparse();
+	if (result != 0)
+	{
+		fprintf(stderr, "Mather: Error: Parsing failed\n");
+		fclose(fd);
+		return 1;
+	}
 	/*we execute here*/
 	/*on when the final tree is comstructted, we reverse once and that's all*/
 	root->statements = reverse_stmt_list(root);

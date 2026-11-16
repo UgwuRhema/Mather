@@ -95,6 +95,9 @@ conditional_stmt: IF_TOK LEFTPAREN_TOK expr RIGHTPAREN_TOK COLON_TOK statements 
 				{
 					$$ = stmt_condition($3, $6, NULL);
 				}
+				| IF_TOK LEFTPAREN_TOK expr RIGHTPAREN_TOK COLON_TOK statements SEMICOLON_TOK ELSE_TOK COLON_TOK statements SEMICOLON_TOK {
+					$$ = stmt_condition($3, $6, $10);
+				}
 				;
 
 /*expressions*/

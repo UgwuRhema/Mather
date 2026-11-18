@@ -227,19 +227,29 @@ execute_stmt(struct stmt *stmt, struct symbol_table *symbols)
 			}
 			return false;
 		case WHILE_STMT:
-			double out5;/*our expression, just like if and else statements*/
-			/*this would just execute statements till the expression becomes false*/
-			stmt->as.While.stmts->statements = reverse_stmt_list(stmt->as.While.stmts);
-			while (eval_expr(stmt->as.While.condt, symbols, &out5))
+			if (!stmt->as.While.stmts)
 			{
-				while (out5) {
-					if (!execute_tree(stmt->as.While.stmts, symbols))
-					{
-						//error...
-					}
+				fprintf(stderr, "Mather: Error: while statement has no body\n");
+				return false;
+			}
+			/*reverse once*/
+			stmt->as.While.stmts->statements = reverse_stmt_list(stmt->as.While.stmts);
+			for (;;)/*infinite loop*/
+			{
+				double cond;
+				if (!eval_expr(stmt->as.While.condt, symbols, &cond))
+				{
+					fprintf(stderr, "Mather: Error: Failed to evaluate condition for while statment\n");
+					return false;
+				}
+				if (!cond) break;
+				if (!execute_tree(stmt->as.While.stmts, symbols))
+				{
+					fprintf(stderr, "Mather: Error: failed to execute statments in while statement\n");
+					return false;
 				}
 			}
-			return false;
+			return true;
 		default:
 			return false;
 	}

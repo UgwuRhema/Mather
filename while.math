@@ -1,1 +1,7 @@
-
+start:
+	x = 1;
+	\\works right?
+	while (x < 5):
+		print x;
+		x = x + 1;
+	;

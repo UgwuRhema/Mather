@@ -224,9 +224,20 @@ execute_stmt(struct stmt *stmt, struct symbol_table *symbols)
 					return true;
 				}
 				return true;
-			} else {
-				fprintf(stderr, "Mather: Fatal Error: Unknown Error in conditional statement\n");
-				abort();
+			}
+			return false;
+		case WHILE_STMT:
+			double out5;/*our expression, just like if and else statements*/
+			/*this would just execute statements till the expression becomes false*/
+			stmt->as.While.stmts->statements = reverse_stmt_list(stmt->as.While.stmts);
+			while (eval_expr(stmt->as.While.condt, symbols, &out5))
+			{
+				while (out5) {
+					if (!execute_tree(stmt->as.While.stmts, symbols))
+					{
+						//error...
+					}
+				}
 			}
 			return false;
 		default:

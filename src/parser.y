@@ -43,11 +43,13 @@ struct tree *root = NULL;
 %token COMMA_TOK "','"
 %token IF_TOK "'if'"
 %token ELSE_TOK "'else'"
+%token WHILE_TOK "'while'"
 %token EQ_TOK "'=='"
 
 %type <expr> expr rel add term factor
 %type <arglist> call_args
 %type <stat> statement print_stmt assign_stmt conditional_stmt
+%type <stat> loop_statement
 %type <tree> program statements
 
 %%
@@ -70,6 +72,7 @@ statements: %empty  {
 statement: print_stmt { $$ = $1; }
 		 | assign_stmt { $$ = $1; }
 		 | conditional_stmt {$$ = $1; }
+		 | loop_statement {$$ = $1; }
 		 | expr SEMICOLON_TOK { $$ = stmt_expr($1); }
 		 ;
 
@@ -99,6 +102,11 @@ conditional_stmt: IF_TOK LEFTPAREN_TOK expr RIGHTPAREN_TOK COLON_TOK statements 
 					$$ = stmt_condition($3, $6, $10); /*with else block*/
 				}
 				;
+
+loop_statement: WHILE_TOK LEFTPAREN_TOK expr RIGHTPAREN_TOK COLON_TOK statements SEMICOLON_TOK {
+					//$$ = stmt_while($3, $6);
+			  }
+			  ;
 
 /*expressions*/
 expr: rel { $$ = $1; }

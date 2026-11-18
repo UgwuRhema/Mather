@@ -75,7 +75,8 @@ extern int yydebug;
     COMMA_TOK = 276,               /* "','"  */
     IF_TOK = 277,                  /* "'if'"  */
     ELSE_TOK = 278,                /* "'else'"  */
-    EQ_TOK = 279                   /* "'=='"  */
+    WHILE_TOK = 279,               /* "'while'"  */
+    EQ_TOK = 280                   /* "'=='"  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -93,7 +94,7 @@ union YYSTYPE
 	struct tree *tree;
 	struct arglist *arglist;
 
-#line 97 "./src/parser.h"
+#line 98 "./src/parser.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

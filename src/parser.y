@@ -88,9 +88,6 @@ print_stmt: PRINT_TOK expr SEMICOLON_TOK {
 /* NEVER exempt SemiColon */
 assign_stmt: IDENT_TOK ASSIGN_TOK expr SEMICOLON_TOK {
 				$$ = stmt_assign($1, $3);
-			} /*let's add pointers*/
-			| MUL_TOK assign_stmt {
-				printf("Valid pointer\n");
 			}
 			;
 

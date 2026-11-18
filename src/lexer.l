@@ -32,6 +32,10 @@
 	return ELSE_TOK;
 }
 
+"while" {
+	return WHILE_TOK;	
+}
+
 "-"?[0-9]+(\.[0-9]+)? {
 	yylval.num = atof(yytext);
 	return NUM_TOK;

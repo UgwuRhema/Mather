@@ -161,6 +161,19 @@ stmt_print(struct expr *print)
 	return ns;
 }
 
+struct stmt *
+stmt_while(struct expr *c, struct tree *t)
+{
+	if (!c) return NULL;
+	struct stmt *ns = (struct stmt *)malloc(sizeof(*ns));
+	if (!ns) return NULL;
+	ns->type = WHILE_STMT;
+	ns->as.While.condt = c;
+	ns->as.While.stmts = t;
+	ns->next = NULL;
+	return ns;
+}
+
 /*it is not like a print statement at all, and in Mather*/
 /*strings cannot be assigned to variables, only printed*/
 struct stmt *

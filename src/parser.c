@@ -1524,7 +1524,7 @@ yyreduce:
   case 16: /* loop_statement: "'while'" "'('" expr "')'" "':'" statements "';'"  */
 #line 106 "./src/parser.y"
                                                                                                {
-					//$$ = stmt_while($3, $6);
+					(yyval.stat) = stmt_while((yyvsp[-4].expr), (yyvsp[-1].tree));
 			  }
 #line 1530 "./src/parser.c"
     break;

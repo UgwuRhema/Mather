@@ -104,7 +104,7 @@ conditional_stmt: IF_TOK LEFTPAREN_TOK expr RIGHTPAREN_TOK COLON_TOK statements 
 				;
 
 loop_statement: WHILE_TOK LEFTPAREN_TOK expr RIGHTPAREN_TOK COLON_TOK statements SEMICOLON_TOK {
-					//$$ = stmt_while($3, $6);
+					$$ = stmt_while($3, $6);
 			  }
 			  ;
 

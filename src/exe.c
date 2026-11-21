@@ -138,6 +138,31 @@ eval_expr(struct expr *expr, struct symbol_table *symbols, double *out)
 					return false;
 				*out = ceil(number);
 				return true;
+			} else if (strcmp(expr->as.call.name, "sin") == 0) {
+				if (expr->as.call.argc != 1)
+					return false;
+				double num = 0.0;
+				if (!eval_expr(expr->as.call.args->items[0], symbols, &num))
+					return false;
+				*out = sin(num);
+				return true;
+			} else if (strcmp(expr->as.call.name, "cos") == 0) {
+				if (expr->as.call.argc != 1)
+					return false;
+				double num = 0.0;
+				if (!eval_expr(expr->as.call.args->items[0], symbols, &num))
+					return false;
+				*out = cos(num);
+				return true;
+			} else if (strcmp(expr->as.call.name, "tan") == 0) {
+				if (expr->as.call.argc != 1)
+					return false;
+				double num = 0.0;
+				bool res = eval_expr(expr->as.call.args->items[0], symbols, &num);
+				if (!res)
+					return false;
+				*out = tan(num);
+				return true;
 			}
 			return false;
         }

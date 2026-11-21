@@ -1,0 +1,6 @@
+start:
+	\\let's find the value of sin90
+	print "Enter a value for x: ";
+	x = collect;
+	print sin(x);
+	println "Oh shit!";

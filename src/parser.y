@@ -123,6 +123,7 @@ add: term { $$ = $1; }
 	| add MINUS_TOK term { $$ = expr_binary(OP_SUB, $1, $3);}
 	;
 
+/*for division and multiplications*/
 term: factor { $$ = $1; }
 	| term MUL_TOK factor { $$ = expr_binary(OP_MUL, $1, $3); }
 	| term DIV_TOK factor { $$ = expr_binary(OP_DIV, $1, $3); }
@@ -132,7 +133,10 @@ factor: NUM_TOK { $$ = expr_num($1); }
 	  | IDENT_TOK { $$ = expr_ident($1); }
 	  | LEFTPAREN_TOK expr RIGHTPAREN_TOK { $$ = $2; }
 	  | INPUT_TOK { $$ = expr_input(); } /*fake function call*/
+	  /*actual function call*/
 	  | IDENT_TOK LEFTPAREN_TOK call_args RIGHTPAREN_TOK { $$ = expr_call($1, $3); }
+	  | IDENT_TOK LEFTPAREN_TOK RIGHTPAREN_TOK { $$ = expr_call($1, NULL); } /*empty
+	  function calls*/
 	  ;
 
 call_args: expr {

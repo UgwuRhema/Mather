@@ -99,14 +99,15 @@ expr_input(void)
 struct expr *
 expr_call(char *name, struct arglist *args)
 {
-	if (!name || !args)
+	if (!name)
 		return NULL;
 	struct expr *ne = (struct expr *)malloc(sizeof(struct expr));
 	if (!ne) return NULL;
 	ne->type = EXPR_CALL;
 	ne->as.call.name = name;
 	ne->as.call.args = args;
-	ne->as.call.argc = args->count;
+	/*no arguments means argc is 0, args stays NULL*/
+	ne->as.call.argc = args ? args->count : 0;
 	return ne;
 }
 

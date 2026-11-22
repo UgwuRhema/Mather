@@ -1,5 +1,4 @@
 start:
 	\\let's find the value of sin90
-	print "Enter a value for x: ";
 	random_number = rand();
 	print random_number;

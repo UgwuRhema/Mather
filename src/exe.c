@@ -170,8 +170,9 @@ eval_expr(struct expr *expr, struct symbol_table *symbols, double *out)
 				srand(time(0));
 				double random_number = 0.0;
 				/*random number now contains the*/
-				random_number = rand();
+				random_number = (double)rand();
 				*out = random_number;
+				return true;/*ohh i forgot this*/
 			}
 			return false;
         }

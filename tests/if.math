@@ -3,7 +3,7 @@ start:
 	if(x < 2):
 		print x; \\x is finally found
 		println "is less than";
-	; else \\bad code
+	; else: \\bad code
 		print x;
 		println "is not less than";
 	;

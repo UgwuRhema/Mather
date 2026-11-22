@@ -1,4 +1,5 @@
 start:
 	\\let's find the value of sin90
-	random_number = rand();
+	random_number = 1 + (rand() % 10); \\we are guaranteed
+	\\to get a random number from 1 - 10, let's observe
 	print random_number;

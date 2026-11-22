@@ -9,6 +9,7 @@
 %%
 
 "start" {
+	/*like our main function*/
 	return START_TOK;
 }
 
@@ -17,10 +18,13 @@
 }
 
 "println" {
+	/*print with new-line
+	only works on strings*/
 	return PRINTLN_TOK;
 }
 
 "collect" {
+	/*our own personal scanf*/
 	return INPUT_TOK;
 }
 
@@ -29,14 +33,17 @@
 }
 
 "else" {
+/*else keyword*/
 	return ELSE_TOK;
 }
 
 "while" {
+	/*while keyword*/
 	return WHILE_TOK;	
 }
 
 "-"?[0-9]+(\.[0-9]+)? {
+	/*numbers(signed, unsigned, floating-point, etc.)*/
 	yylval.num = atof(yytext);
 	return NUM_TOK;
 }
@@ -63,6 +70,7 @@
 
 
 "==" { return EQ_TOK; }
+"!=" { return NEQ_TOK; }
 "=" { return ASSIGN_TOK; }
 "+" { return ADD_TOK; }
 "-" { return MINUS_TOK; }

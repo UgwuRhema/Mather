@@ -45,7 +45,7 @@ struct tree *root = NULL;
 %token IF_TOK "'if'"
 %token ELSE_TOK "'else'"
 %token WHILE_TOK "'while'"
-%token EQ_TOK "'=='"
+%token EQ_TOK "'=='" NEQ_TOK "'!='"
 
 %type <expr> expr rel add term factor
 %type <arglist> call_args
@@ -117,6 +117,8 @@ rel: add { $$ = $1; }
 	| rel LTHAN_TOK add { $$ = expr_binary(OP_LTHAN, $1, $3); }
 	| rel GTHAN_TOK add { $$ = expr_binary(OP_GTHAN, $1, $3);}
 	| rel EQ_TOK add { $$ = expr_binary(OP_EXEQ, $1, $3); }
+	| rel NEQ_TOK add { $$ = expr_binary(OP_NEQ, $1, $3);  }
+	/*not equals*/
 	;
 
 add: term { $$ = $1; }

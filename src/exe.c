@@ -71,6 +71,13 @@ eval_expr(struct expr *expr, struct symbol_table *symbols, double *out)
 					else
 						*out = 0.0;
 					break;
+				case OP_NEQ:
+					/*the other way around for OP_EXEQ*/
+					if (left != right)
+						*out = 1.0;
+					else
+						*out = 0.0;
+					break;
 				default:
 					return false;
 			}

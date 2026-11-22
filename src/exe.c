@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <time.h>
 
 bool
 eval_expr(struct expr *expr, struct symbol_table *symbols, double *out)
@@ -163,6 +164,14 @@ eval_expr(struct expr *expr, struct symbol_table *symbols, double *out)
 					return false;
 				*out = tan(num);
 				return true;
+			} else if (strcmp(expr->as.call.name, "rand") == 0) {
+				/*no args needed*/
+				/*let's set a seed first*/
+				srand(time(0));
+				double random_number = 0.0;
+				/*random number now contains the*/
+				random_number = rand();
+				*out = random_number;
 			}
 			return false;
         }

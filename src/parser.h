@@ -65,18 +65,19 @@ extern int yydebug;
     MINUS_TOK = 266,               /* "'-'"  */
     DIV_TOK = 267,                 /* "'/'"  */
     MUL_TOK = 268,                 /* "'*'"  */
-    SEMICOLON_TOK = 269,           /* "';'"  */
-    COLON_TOK = 270,               /* "':'"  */
-    LEFTPAREN_TOK = 271,           /* "'('"  */
-    RIGHTPAREN_TOK = 272,          /* "')'"  */
-    GTHAN_TOK = 273,               /* "'>'"  */
-    LTHAN_TOK = 274,               /* "'<'"  */
-    STRING_TOK = 275,              /* "'String'"  */
-    COMMA_TOK = 276,               /* "','"  */
-    IF_TOK = 277,                  /* "'if'"  */
-    ELSE_TOK = 278,                /* "'else'"  */
-    WHILE_TOK = 279,               /* "'while'"  */
-    EQ_TOK = 280                   /* "'=='"  */
+    MODULOS_TOK = 269,             /* "'%'"  */
+    SEMICOLON_TOK = 270,           /* "';'"  */
+    COLON_TOK = 271,               /* "':'"  */
+    LEFTPAREN_TOK = 272,           /* "'('"  */
+    RIGHTPAREN_TOK = 273,          /* "')'"  */
+    GTHAN_TOK = 274,               /* "'>'"  */
+    LTHAN_TOK = 275,               /* "'<'"  */
+    STRING_TOK = 276,              /* "'String'"  */
+    COMMA_TOK = 277,               /* "','"  */
+    IF_TOK = 278,                  /* "'if'"  */
+    ELSE_TOK = 279,                /* "'else'"  */
+    WHILE_TOK = 280,               /* "'while'"  */
+    EQ_TOK = 281                   /* "'=='"  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -94,7 +95,7 @@ union YYSTYPE
 	struct tree *tree;
 	struct arglist *arglist;
 
-#line 98 "./src/parser.h"
+#line 99 "./src/parser.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

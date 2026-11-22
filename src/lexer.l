@@ -68,6 +68,7 @@
 "-" { return MINUS_TOK; }
 "/" { return DIV_TOK; }
 "*" { return MUL_TOK; }
+"%"  { return MODULOS_TOK; }
 ";" { return SEMICOLON_TOK; }
 ":" { return COLON_TOK; }
 "(" { return LEFTPAREN_TOK; }

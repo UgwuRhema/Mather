@@ -33,6 +33,7 @@ struct tree *root = NULL;
 %token MINUS_TOK "'-'"
 %token DIV_TOK "'/'"
 %token MUL_TOK "'*'"
+%token MODULOS_TOK "'%'"
 %token SEMICOLON_TOK "';'"
 %token COLON_TOK "':'"
 %token LEFTPAREN_TOK "'('"
@@ -127,6 +128,8 @@ add: term { $$ = $1; }
 term: factor { $$ = $1; }
 	| term MUL_TOK factor { $$ = expr_binary(OP_MUL, $1, $3); }
 	| term DIV_TOK factor { $$ = expr_binary(OP_DIV, $1, $3); }
+	/*modulos expressions*/
+	| term MODULOS_TOK factor { $$ = expr_binary(OP_MOD, $1, $3); }
 	;
 
 factor: NUM_TOK { $$ = expr_num($1); }

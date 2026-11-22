@@ -5,6 +5,8 @@
 #include <math.h>
 #include <time.h>
 
+extern void yyerror(const char *);
+
 bool
 eval_expr(struct expr *expr, struct symbol_table *symbols, double *out)
 {
@@ -43,6 +45,14 @@ eval_expr(struct expr *expr, struct symbol_table *symbols, double *out)
 						return false;
 					}
 					*out = left / right;
+					break;
+				case OP_MOD:
+					if (right == 0)
+					{
+						yyerror("division by zero\n");
+						return false;
+					}
+					*out = left % right;/*modulos*/
 					break;
 				case OP_GTHAN:
 					if (left > right)

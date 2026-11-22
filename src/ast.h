@@ -32,6 +32,7 @@ enum OP_TYPE
 	OP_GTHAN,
 	OP_LTHAN,
 	OP_EXEQ,
+	OP_MOD,
 };
 
 struct expr
